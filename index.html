@@ -44,24 +44,13 @@
     <td><img border="0" src="images/uva.png" height="70" width="70" style="padding-right:15px"></td>
     <td><span style="font-size:40px; font-family:Arial; font-weight:bold;">uHunt</span><br>
       <span style="font-size:12px; font-family: verdana; font-style: italic; ">hunt problems that matter</span><br>
-      <!--a href="#">statistics</a> | <a href="#">coaching</a> | <a href="#">live-archive</a> | <a href="#">about</a-->
     </td>
-    <!-- <td align=center style="padding-left:0px;" bgcolor="#3baae3" width="140"> </td> -->
   </tr>
   </table>
 
-  <p>uHunt is a complementary tool for <a target="_blank" href="http://uva.onlinejudge.org/index.php">UVa online-judge</a>
-  that provides: 
+  <p>uHunt is designed for users to effectively solve problems at <a target="_blank" href="http://uva.onlinejudge.org/index.php">UVa online-judge</a>. It provides statistics to keep track of user progress, virtual contest for group training, web API to build more tools. Watch the <a target="_blank" href="https://github.com/felix-halim/uhunt-components">uHunt development at Github</a>.
 
-  <a style="text-decoration:none" href="/id/339">Statistics</a>,
-  <a style="text-decoration:none" href="/vcontest">Virtual Contests</a>,
-  <a style="text-decoration:none" href="/statscmp">Statistics Comparer</a>,
-  <a style="text-decoration:none" href="/api">Web API</a>,
-  <a style="text-decoration:none" href="/faq">FAQ</a>.
-
-  Watch uHunt development on Github.
-
-  <p>To submit your solution, use <a target="_blank" href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem">UVa Quick Submit</a>.<br>
+  To submit your solution, use <a target="_blank" href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem">UVa Quick Submit</a>.</p>
 
   <p style="margin:0">Your UVa username:
     <input placeholder="UVa username" ng-model="username_input" value="" size="13">
@@ -76,9 +65,7 @@
 
   <div uhunt-problem-search="problem_search.number" show="problem_search.show" search="problem_search.search" hide="problem_search.hide"></div>
 
-  <br style="clear:both">
-
-  <div uhunt-livesubs></div>
+  <div style="clear:both" uhunt-livesubs></div>
   <hr style="clear:both">
 
   <div uhunt-statistics></div>
