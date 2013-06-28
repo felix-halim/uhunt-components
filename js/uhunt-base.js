@@ -611,7 +611,7 @@ s(d)).toLowerCase()},
   return {
     template: '<span>{{rank}}</span>',
     link: function (scope, element, attrs) {
-      scope.rank = attrs.uhuntRank == '-1' ? '-' : attrs.uhuntRank;
+      scope.rank = (!attrs.uhuntRank || attrs.uhuntRank == '-1') ? '-' : attrs.uhuntRank;
     }
   };
 })

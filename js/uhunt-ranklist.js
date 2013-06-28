@@ -7,7 +7,7 @@ angular.module('uHunt.ranklist', ['uHunt.base'])
   });
 })
 
-.directive('uhuntNextProblems', function (uhunt_rpc, ranklist_db, uhunt) {
+.directive('uhuntRanklist', function (uhunt_rpc, ranklist_db, uhunt) {
   return {
     replace: true,
     // scope: { number:'=uhuntProblemSearch', show:'=', hide:'=', search:'=', },

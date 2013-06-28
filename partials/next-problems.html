@@ -53,7 +53,10 @@
             <tr ng-repeat="p in next_problems | limitTo:max_next_problems" height="17">
               <td align="center">{{$index + 1}}</td>
               <td align="center" bgcolor="{{column_color('num',p.color)}}"><span uhunt-problem="{{p.pid}}"></span></td>
-              <td bgcolor="{{column_color('tit',p.color)}}"><span width="170" uhunt-problem-discuss="{{p.pid}}"></span></td>
+              <td bgcolor="{{column_color('tit',p.color)}}">
+                <span style="float:right; padding-right:5px" uhunt-discuss="{{p.num}}"></span>
+                <span uhunt-problem-title="{{p.pid}}" width="275"></span>
+              </td>
               <td align="center" bgcolor="{{column_color('nos',p.color)}}">{{p.nos}}</td>
               <td align="center" bgcolor="{{column_color('ac',p.color)}}">{{p.ac}}</td>
               <td align="center" bgcolor="{{column_color('panos',p.color)}}">{{p.panos + '%'}}</td>
@@ -61,7 +64,7 @@
               <td align="center" bgcolor="{{column_color('mrun',p.color)}}" uhunt-best-runtime="{{p.pid}}"></td>
               <td ng-show="view_which!=0" align="center" bgcolor="{{column_color('run',p.color)}}" uhunt-runtime="{{p.run}}"></td>
               <td ng-show="view_which!=0" align="center" bgcolor="{{column_color('diff',p.color)}}" uhunt-runtime="{{p.diff}}"></td>
-              <td ng-show="view_which!=0" align="center" bgcolor="{{column_color('rank',p.color)}}"uhunt-rank="{{p.rank}}"></td>
+              <td ng-show="view_which!=0" align="center" bgcolor="{{column_color('rank',p.color)}}" uhunt-rank="{{p.rank}}"></td>
             </tr>
           </tbody>
         </table>
