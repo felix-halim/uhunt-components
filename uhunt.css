@@ -1,0 +1,123 @@
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+.menu:before { content: "["; }
+.menu:after { content: "]"; }
+.menu > li { display: inline; }
+.menu > li:before { content: "|"; padding-right: 0.3em; }
+.menu > li:nth-child(1):before { content: ""; padding: 0; }
+
+th { font-family: verdana; font-size: 12px; }
+td { font-family: verdana; font-size: 11px; }
+p  { font-family: verdana; font-size: 13px; }
+
+.tablebar { background: #3baae3 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAGQCAYAAABvWArbAAAASklEQVQ4je3PoQ2AQBjF4L7eHYOyJpOwAY4BEGAQGDQJ+c2X2jIv2ylAURS/Zd0PNGBLsAkOg+NRwakFu+BksBvs4S7z9UdRFK9c1/AJQc18gAMAAAAASUVORK5CYII=) 50% 50% repeat-x; }
+.tablesubar { background: #deedf7 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABkCAYAAABHLFpgAAAAL0lEQVQYlWP4+P33fyYGBgaGIUT8R7D+w7n//0NZCDEo6z+mGEIxuo7/mCYPNwIANF0liBOYV+gAAAAASUVORK5CYII=) 50% 50% repeat-x; }
+
+.livesubs a.white     { color: white; text-decoration: none; font-weight: normal; }
+a.white     { color: white; text-decoration: none; font-weight: normal; }
+a.prob      { color: black; }
+a.nou       { text-decoration: none; }
+a.sub_ac    { text-decoration: underline; }
+a.sub_wa    { text-decoration: none; color: orange; }
+a.sub_none  { text-decoration: none; }
+a.sub_2d    { color: #F00; font-weight: bold; }
+a.sub_7d    { color: #0A0; font-weight: bold; }
+a.sub_1m    { color: #00F; font-weight: bold; }
+a.sub_best  { font-weight: bold; }
+
+.highlight-enter-setup, .highlight-leave-setup {
+  -webkit-transition: all linear 2s;
+  -moz-transition: all linear 2s;
+  -ms-transition: all linear 2s;
+  -o-transition: all linear 2s;
+  transition: all linear 2s;
+}
+.highlight-enter-setup { background-color: yellow; }
+.highlight-enter-start { background-color: white; }
+.highlight-leave-setup { display: none; }
+.highlight-leave-start { display: none; }
+
+.ellipsis {
+  text-decoration: none;
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.uhunt_chat {
+  font-family:        verdana;
+  font-size:          11px;
+  background-color:   #eee;
+  border:             1px solid #aaa;
+}
+
+.scroll-down-able { overflow-y: auto; word-wrap: break-word; }
+
+.cpbook-ed2 { background: #A88A6F url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAGQCAYAAABvWArbAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABRSURBVEhLY7gwwek/EwMQjBKjYTCaDoZtNvj95Q3Ib4wMTIyMQIKBkQlIMAERIyMzkGACEgxgFjOIAMtCJGBKGEDaIBKjpcVoGIwWloMyGwAAsdgI1MBn+dcAAAAASUVORK5CYII=) 50% 50% repeat-x; }
+.cpbook-ed3 { background: #11BB55; }
+.cpbook-chapter-selected { background-color: #E6E6FF; }
+.cpbook-blue-border { border: 1px solid blue; }
+.cpbook-white-border { border: 1px solid white; }
+.selectable-table tr:hover{ background-color: #EEEEFF; }
+.cpbook-table td { border: 0; font-size: 11px; }
+.cpbook-table td:nth-child(2) { width: 90px; }
+
+.alt_colors tr:nth-child(even) { background:#F6F6F6; }
+.alt_colors tr:nth-child(odd) { background:#FFFFFF; }
+
+.underline        { text-decoration: underline; }
+.lightgreen-bg    { background-color: lightgreen; }
+.lightgreen-color { color: lightgreen; }
+.white-color      { color: white; }
+.volume-selected { background-color: #E6E6FF; }
+
+#ranklist_table td, #next_table td { font-size:12px; }
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none;
+}
+
+
+h2{margin-top:25px;}
+hr{height:0px;border-collapse:collapse;border:1px solid #AAAAAA;}
+.hover_blue:hover{color:blue;}
+.volume-selected{background-color:#DEF;}
+#ranklist_tbody tr{height:19px;}
+
+.tablebar th { font-size:13px; }
+.tablebar {
+  border: 1px solid #2694e8;
+  font-weight: bold;
+  color: #ffffff;
+  height:28px;
+}
+
+.tablebar2 {
+  border: 1px solid #2694e8;
+  font-weight: bold;
+  color: #ffffff;
+  height:28px;
+}
+
+.tablesubar {
+  border: 1px solid #aed0ea;
+  color: #222222; font-weight: bold;
+  height:18px;
+}
+
+.hilite { background-color: blue; color: white; }
+.ui-autocomplete {
+  max-height: 300px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  font-size: 12px;
+  font-family: verdana;
+}

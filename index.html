@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" ng-app="uHunt">
+<head>
+  <meta charset="utf-8">
+  <title>uHunt</title>
+  <link rel="stylesheet" href="uhunt.css"/>
+  <link rel="shortcut icon" href="images/uva-rounded.png" />
+  <script src="js/angular.js"></script>
+  <script src="js/uhunt-base.js"></script>
+  <script src="js/uhunt-chat.js"></script>
+  <script src="js/uhunt-problem-search.js"></script>
+  <script src="js/uhunt-statistics.js"></script>
+  <script src="js/uhunt-livesubs.js"></script>
+  <script src="js/uhunt-cpbook.js"></script>
+  <script src="js/uhunt-next-problems.js"></script>
+  <script src="js/uhunt-ranklist.js"></script>
+  <script src="js/uhunt-statscmp.js"></script>
+  <script src="js/uhunt-vcontest.js"></script>
+  <script>
+
+  angular.module('uHunt', [
+    'uHunt.base',
+    'uHunt.chat',
+    'uHunt.problem_search',
+    'uHunt.statistics',
+    'uHunt.livesubs',
+    'uHunt.cpbook',
+    'uHunt.next-problems',
+    'uHunt.ranklist',
+    'uHunt.statscmp',
+    'uHunt.vcontest',
+  ]);
+  </script>
+</head>
+
+<body>
+<div style="margin:0 auto; width:970px">
+
+  <div uhunt-chat width="550" height="250" style="float:right; padding: 0 0 10px 25px"></div>
+
+  <!-- LOGO -->
+  <table cellspacing="0" cellpadding="0">
+  <tr>
+    <td><img border="0" src="images/uva.png" height="70" width="70" style="padding-right:15px"></td>
+    <td><span style="font-size:40px; font-family:Arial; font-weight:bold;">uHunt</span><br>
+      <span style="font-size:12px; font-family: verdana; font-style: italic; ">hunt problems that matter</span><br>
+      <!--a href="#">statistics</a> | <a href="#">coaching</a> | <a href="#">live-archive</a> | <a href="#">about</a-->
+    </td>
+    <!-- <td align=center style="padding-left:0px;" bgcolor="#3baae3" width="140"> </td> -->
+  </tr>
+  </table>
+
+  <p>uHunt is a complementary tool for <a target="_blank" href="http://uva.onlinejudge.org/index.php">UVa online-judge</a>
+  that provides: 
+
+  <a style="text-decoration:none" href="/id/339">Statistics</a>,
+  <a style="text-decoration:none" href="/vcontest">Virtual Contests</a>,
+  <a style="text-decoration:none" href="/statscmp">Statistics Comparer</a>,
+  <a style="text-decoration:none" href="/api">Web API</a>,
+  <a style="text-decoration:none" href="/faq">FAQ</a>.
+
+  Watch uHunt development on Github.
+
+  <p>To submit your solution, use <a target="_blank" href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem">UVa Quick Submit</a>.<br>
+
+  <p style="margin:0">Your UVa username:
+    <input placeholder="UVa username" ng-model="username_input" value="" size="13">
+  </p>
+
+  <form ng-submit="problem_search.show=true; problem_search.search(2,1)">
+    <p>Search Problem Number:
+    <input ng-model="problem_search.number" value="100" style="width:60px">&nbsp;
+    <input type="submit" value="Search">
+    <button ng-click="problem_search.number=''; problem_search.hide()">Clear</button></p>
+  </form>
+
+  <div uhunt-problem-search="problem_search.number" show="problem_search.show" search="problem_search.search" hide="problem_search.hide"></div>
+
+  <br style="clear:both">
+
+  <div uhunt-livesubs></div>
+  <hr style="clear:both">
+
+  <div uhunt-statistics></div>
+  <hr style="clear:both">
+
+  <div uhunt-cpbook></div>
+  <hr style="clear:both">
+
+  <div uhunt-next-problems></div>
+  <hr style="clear:both">
+
+  <div uhunt-ranklist></div>
+  <hr style="clear:both">
+
+  <div uhunt-statscmp></div>
+  <hr style="clear:both">
+
+  <div uhunt-vcontest></div>
+  <hr style="clear:both">
+
+  <div>
+    <h2 align="center">Web API - Build Your Own Tool</h2>
+
+    <p>I have published <a target="_blank" href="/api"><b>a Web API</b> for acquiring real-time UVa statistics</a>.
+    Please subscribe to 
+    <b><a target="_blank" href="https://groups.google.com/forum/?fromgroups#!forum/uhunt-api">uhunt-api mailing list</a></b> 
+    to receive updates and discuss about the API.
+    You are free to use the API to build your own statistical tools.
+    Let me know if you have build a great tool based on this API.
+    I will add your tool to the list below:
+    </p>
+
+    <ul>
+      <li><a target="_new" href="http://umt.boocode.com"><b>UVa Management Tool</b></a> -
+      By <a target="_new" href="/id/61126">Lâm Phan Việt</a>
+
+      <li><a target="_new" href="https://github.com/lucastan/uva-node"><b>UVa Command Line Tool</b></a> -
+      By <a target="_new" href="/id/64869">Bao Hong Tan</a>
+
+      <li>Windows Phone Apps:
+      <a target="_new" href="http://www.windowsphone.com/en-us/store/app/uva-tools/68705694-3fa8-4b3a-83b3-18274060ccbc"><b>UVa Tools</b></a> by <a target="_new" href="/id/60671">Héctor Galindo</a> and
+      <a target="_new" href="http://www.windowsphone.com/en-us/store/app/uva-stats/102ea0da-e48e-42d8-a9eb-acb99b81a18c"><b>UVa Stats</b></a> by <a target="_new" href="/id/180414">Jonathon Simister</a>.
+
+      <li>Android App:
+      <a target="_new" href="https://play.google.com/store/apps/details?id=com.acombee.uvatools"><b>UVa Mobile</b></a> by <a target="_new" href="http://www.acombee.com/">Acombee</a>.
+    </ul>
+
+    <p>uHunt Web API Change Log:
+    <ul>
+      <li>21 May 2013 - Added subs-user-last to retrieve last submissions from a specific user.
+      <li>18 May 2013 - Added Competitive Programming Book Exercises API.
+      <li>20 Mar 2013<br>
+      <a target="_blank" href="https://groups.google.com/forum/?fromgroups=#!topic/uhunt-api/y1X8_o57BwY">Breaking change to the Live Event if there is no event for ~1 minute</a>.<br>
+      <a href="https://groups.google.com/forum/?fromgroups=#!topic/uhunt-api/VjrJ7UP1RfU">Added User Ranklist API to get users from a specific rank positions</a>.
+      <li>14 Mar 2013 - Added new problem ranklist API.
+    </ul>
+  </div>
+
+  <hr style="clear:both" />
+
+  <div>
+    <h2 align="center">Frequently Asked Questions</h2>
+
+    <ul>
+    <li>Q: What are the meaning of the colors on some problem numbers?<br>
+    A: The problem number will will be colored
+    Red if it was last submitted less than <b style="color:#FF0000">2 days</b> ago,
+    Green for less than <b style="color:#00AA00">1 week</b> ago,
+    Blue for less than <b style="color:#0000FF">1 month</b> ago,
+    Orange if the problem is <b style="color:orange">not yet Accepted</b>,
+    otherwise, <b>Black</b>.
+    In the ChatBox and in the Live Submissions, some problem numbers will be
+    <u>underlined</u> if you have solved the problem.
+    The <b>bold problem numbers</b> in the statistics denotes that
+    the runtime of your submission is equal to the best runtime (rank 1 of that problem).
+    </li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

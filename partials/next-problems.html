@@ -1,0 +1,87 @@
+<div>
+  <h2 align="center">Next Problems to Solve</h2>
+
+  <p>You can view your unsolved/solved problems, sort them, filter by volume, etc.
+  If you just want to solve as many problems as quickly as possible,
+  it's convinient to pick problems according to the <b>dacu</b> (distinct accepted users) in descending order.
+  The bigger the <b>dacu</b> the easier the problem should be and the more probable
+  it will appear in the <a target="_blank" href="http://acm.uva.es/board/">UVa discussion board</a>.
+  </p>
+
+  <!--p>Nowdays, algorithms must be designed not only correct, but it has to be fast!
+  The table below provides the problems you have solved ordered by the difference
+  in the runtime with the fastest solution.
+  It will be fun tweaking your code. Sometimes it requires a whole different
+  algorithm to make a big runtime improvement.
+  </p-->
+
+  <table align="center">
+    <tr>
+      <td valign="top">
+        <table id="next_table" border="0" style="border: 1px solid #AAA" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr class="tablebar" height="25" style="color:white">
+              <th align="left" colspan="{{colspan}}" style="padding-left:10px">
+                <tt style="float:right">Show : [
+                  <a style="cursor:pointer; color:white" ng-click="set_max_next_problems(25)">25</a> |
+                  <a style="cursor:pointer; color:white" ng-click="set_max_next_problems(50)">50</a> |
+                  <a style="cursor:pointer; color:white" ng-click="set_max_next_problems(100)">100</a>
+                ]&nbsp;</tt>
+                <tt style="float:right">View : [
+                  <span id="npv_unsolved" class="np_view" ng-click="set_which(0)" style="cursor:pointer">unsolved</span> |
+                  <span id="npv_solved" class="np_view" ng-click="set_which(1)" style="cursor:pointer">solved</span> |
+                  <span id="npv_both" class="np_view" ng-click="set_which(2)" style="cursor:pointer">both</span>
+                ] &nbsp;</tt>
+                Volume : {{volume_name}}
+              </th>
+            </tr>
+            <tr class="tablesubar" height="22">
+              <th width="35">No</th>
+              <th width="65" ng-click="sort_next_by('num')" style="cursor:pointer">Number</th>
+              <th width="280" ng-click="sort_next_by('tit')" style="cursor:pointer" align="left">&nbsp; Problem Title</th>
+              <th width="55" ng-click="sort_next_by('nos')" style="cursor:pointer">nos</th>
+              <th width="55" ng-click="sort_next_by('ac')" style="cursor:pointer">anos</th>
+              <th width="55" ng-click="sort_next_by('panos')" style="cursor:pointer">%anos</th>
+              <th width="55" ng-click="sort_next_by('dacu')" style="cursor:pointer">dacu</th>
+              <th width="55" ng-click="sort_next_by('mrun')" style="cursor:pointer">best</th>
+              <th ng-show="view_which!=0" width="55" ng-click="sort_next_by('run')" style="cursor:pointer">yours</th>
+              <th ng-show="view_which!=0" width="55" ng-click="sort_next_by('diff')" style="cursor:pointer">diff</th>
+              <th ng-show="view_which!=0" width="55" ng-click="sort_next_by('rank')" style="cursor:pointer">rank</th>
+            </tr>
+          </thead>
+          <tbody class="alt_colors">
+            <tr ng-repeat="p in next_problems | limitTo:max_next_problems" height="17">
+              <td align="center">{{$index + 1}}</td>
+              <td align="center" bgcolor="{{column_color('num',p.color)}}"><span uhunt-problem="{{p.pid}}"></span></td>
+              <td bgcolor="{{column_color('tit',p.color)}}"><span width="170" uhunt-problem-discuss="{{p.pid}}"></span></td>
+              <td align="center" bgcolor="{{column_color('nos',p.color)}}">{{p.nos}}</td>
+              <td align="center" bgcolor="{{column_color('ac',p.color)}}">{{p.ac}}</td>
+              <td align="center" bgcolor="{{column_color('panos',p.color)}}">{{p.panos + '%'}}</td>
+              <td align="center" bgcolor="{{column_color('dacu',p.color)}}">{{p.dacu}}</td>
+              <td align="center" bgcolor="{{column_color('mrun',p.color)}}" uhunt-best-runtime="{{p.pid}}"></td>
+              <td ng-show="view_which!=0" align="center" bgcolor="{{column_color('run',p.color)}}" uhunt-runtime="{{p.run}}"></td>
+              <td ng-show="view_which!=0" align="center" bgcolor="{{column_color('diff',p.color)}}" uhunt-runtime="{{p.diff}}"></td>
+              <td ng-show="view_which!=0" align="center" bgcolor="{{column_color('rank',p.color)}}"uhunt-rank="{{p.rank}}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td valign="top" style="padding-left:15px; margin:0px; padding-top:0">
+        <table style="width:120px; border: 1px solid #AAA;" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr class="tablebar" height="25" style="color:white">
+              <th colspan="3">Volumes</th>
+            </tr>
+          </thead>
+          <tbody class="selectable-table">
+            <tr ng-repeat="v in volumes" style="cursor:pointer" ng-click="show_table(v.index)" ng-class="{'volume-selected': v.index==volume}">
+              <td width="55" align="center">{{v.name}}</td>
+              <td width="35"><span uhunt-bar percent="{{v.percentage}}" color="green" width="30" height="10"></span></td>
+              <td width="30" align="right"><tt style="margin-right:5px">{{v.percentage}}%</tt></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>

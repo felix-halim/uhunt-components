@@ -1,0 +1,122 @@
+<div>
+  <h2 align="center">Competitive Programming Exercises</h2>
+
+  <p style="float:left; margin:0 15px 0 0; padding:0;" align="center">
+    <a target="_blank" href="http://sites.google.com/site/stevenhalim/">
+      <!-- cp.jpg -->
+      <img border="0" width="150" ng-src="{{cpbook_image}}" style="margin-bottom:5px; box-shadow: 5px 5px 5px #ccc; -moz-box-shadow: 5px 5px 5px #ccc; -webkit-box-shadow: 5px 5px 5px #ccc;"></a><br>
+    <a target="_blank" href="http://www.facebook.com/pages/Competitive-Programming/117431294944607">FB Page</a> |
+    <a target="_blank" href="http://sites.google.com/site/stevenhalim/">Info</a> |
+    <a target="_blank" href="{{lulu_link}}">Buy</a><br>
+    <span style="line-height:20px">
+    Edition:
+    <a ng-click="switch_edition(0)" style="font-weight:bold; color:{{color1}}; cursor:pointer">1st</a>, 
+    <a ng-click="switch_edition(1)" style="font-weight:bold; color:{{color2}}; cursor:pointer">2nd</a>, 
+    <a ng-click="switch_edition(2)" style="font-weight:bold; color:{{color3}}; cursor:pointer">3rd</a>
+    </span>
+  </p>
+
+  <table id="cpbook-chapters" border="1" style="float:right; width:360px; margin-left:15px;" cellpadding="0" cellspacing="0">
+    <thead>
+      <tr class="tablebar cpbook-ed{{edition+1}}" style="height:30px">
+      <!-- // #97683E -->
+        <th style="border:0; color:white" colspan="3">{{nth_ed}} Edition's Exercises
+          <span style="font-weight:normal">(switch to: 
+          <a ng-click="switch_edition(0)" style="font-weight:bold; color:{{color1}}; cursor:pointer">1st</a>,
+          <a ng-click="switch_edition(1)" style="font-weight:bold; color:{{color2}}; cursor:pointer">2nd</a>,
+          <a ng-click="switch_edition(2)" style="font-weight:bold; color:{{color3}}; cursor:pointer">3rd</a>
+          )</span>
+        </th>
+      </tr>
+      <tr height="22" bgcolor="#EEEEEE">
+        <td nowrap style="padding:0 5px 0 5px; border:0px">Book Chapters</td>
+        <td nowrap style="padding:0 5px 0 5px; border:0px">Starred &#9733;</td>
+        <td nowrap style="padding:0 5px 0 5px; border:0px">ALL</td>
+        <!--a class="cp-show" style="text-decoration:none" href="javascript:uhunt.cpbook.render('Starred')">Starred</a> |
+        <a class="cp-show" style="text-decoration:none" href="javascript:uhunt.cpbook.render(\'Compact\')">Compact</a> | >
+        <a class="cp-show" style="text-decoration:none" href="javascript:uhunt.cpbook.render('Everything')">Everything</a-->
+      </tr>
+    </thead>
+    <tbody class="selectable-table">
+      <tr height="22" ng-repeat="c in chapters" ng-class="{'cpbook-chapter-selected': $index==chapter}">
+        <td nowrap style="padding:0 5px 0 5px; font-size:12px; border:0px; cursor:pointer" ng-click="set_chapter($index)">{{$index + 1}}. {{c.title}}</td>
+        <td nowrap width="85" style="padding:0 5px 0 5px; cursor:pointer;" ng-click="set_chapter($index, 'Starred')" ng-class="{
+          'cpbook-blue-border': is_selected_and('Starred', $index),
+          'cpbook-white-border': not_is_selected_and('Starred', $index)
+        }">
+          <table width="100%">
+            <tr>
+              <td><span uhunt-bar percent="{{percentage(c, 'Starred')}}" color="green" width="30" height="10"></span></td>
+              <td align="right">{{percentage(c, 'Starred')}}%</td>
+            </tr>
+          </table>
+        </td>
+        <td nowrap width="85" style="padding:0 5px 0 5px; cursor:pointer" ng-click="set_chapter($index, 'Everything')" ng-class="{
+          'cpbook-blue-border': is_selected_and('Everything', $index),
+          'cpbook-white-border': not_is_selected_and('Everything', $index)
+        }">
+          <table width="100%">
+            <tr>
+              <td><span uhunt-bar percent="{{percentage(c, 'Everything')}}" color="green" width="30" height="10"></span></td>
+              <td align="right">{{percentage(c, 'Everything')}}%</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><a target="_blank" href="http://www.comp.nus.edu.sg/~stevenha/">Steven Halim</a> and I published the <a target="_blank" href="http://sites.google.com/site/stevenhalim/">Competitive Programming</a> book which is targetted
+  to help regular computer science students to quickly get up and running for the
+  <a target="_blank" href="http://cm.baylor.edu/welcome.icpc">ACM ICPC</a> as well as <a target="_blank" href="http://www.ioinformatics.org/index.shtml">IOI</a>.
+  The book discusses the types of problems that are frequently occurs in programming contests.
+  The exercises have been integrated to this uHunt tool so that you can keep track of your progress.
+  To get started, select a chapter from the table on the right.
+  Each chapter has starred problems (i.e., a must try problem). Happy solving :)</p>
+
+  <p>
+    <span style="margin:0 auto 0 auto">
+    <a target="_blank" href="http://www.facebook.com/photo.php?fbid=479312647080&set=a.479287957080.246013.655772080&type=1&l=baf1c90a93&theater"><img width="125" border="0" src="/images/cp-judges1-thumb.jpg"></a>
+    <a target="_blank" href="https://www.facebook.com/photo.php?fbid=430443890310011&set=a.430443883643345.96982.117431294944607&type=1&theater"><img width="125" border="0" src="/images/uva-team.jpg"></a>
+    <a target="_blank" href="https://www.facebook.com/photo.php?fbid=10150833678332081&set=a.10150833671592081.393934.655772080&type=3&theater"><img border="0" width="140" src="/images/felix-uhunt.jpg"></a>
+    </span>
+  </p>
+
+  <!--p>Here is recent photo albums of ACM ICPC 2010 Regional
+  <b><a target="_blank" href="http://www.facebook.com/album.php?aid=246005&id=655772080&l=fec7ed1177">Jakarta</a></b> and
+  <b><a target="_blank" href="http://www.facebook.com/album.php?aid=246013&id=655772080&l=baf1c90a93">Kuala Lumpur</a></b>.
+  We got a chance to take photos with Dr. C J Hwang (ACM ICPC Asia director) and some of the judges (Shahriar Manzoor, Derek Kisman, Jane Alam Jan, and Mahmudur Rahman).
+  <br style="clear:both;">
+  </p-->
+
+  <br style="clear:both">
+
+  <div ng-show="chapter >= 0">
+    <div ng-repeat="s in sections" style="float:{{s.float}}">
+      <table width="475" class="cpbook-table" border="1" style="margin-bottom:15px;" cellspacing="0">
+        <thead>
+          <tr>
+            <th colspan="3" style="height:20px; border:0; color:white;" class="tablebar" ng-bind-html-unsafe="s.section_title"></th>
+          </tr>
+        </thead>
+        <tbody class="alt_colors" ng-repeat="sc in s.sections">
+          <tr>
+            <td colspan="3" style="font-weight:bold; font-size:11px" ng-bind-html-unsafe="sc.title"></td>
+          </tr>
+          <tr ng-repeat="ssc in sc.sections">
+            <td nowrap width="*" bgcolor="">
+              <span style="float:right; padding-right:5px" uhunt-discuss="{{ssc.p.num}}"></span>
+              &nbsp;<span uhunt-problem="{{ssc.p.pid}}"></span> -
+              <span uhunt-problem-title="{{ssc.p.pid}}" width="210"></span>
+            </td>
+            <td style="width:65px" align="right">
+              <span ng-show="{{ssc.starred}}">&#9733;&nbsp;</span>
+              Lev {{ssc.level}}&nbsp;
+            </td>
+            <td width="135" ng-bind-html-unsafe="ssc.status"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

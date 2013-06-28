@@ -1,0 +1,128 @@
+<div>
+  <h2 align="center">Virtual Contests Generator</h2>
+
+  <p>It is important to measure your performance under contest settings.
+  If you want to solve 5 problems in 3 hours, this tool can help you to measure it.
+  First, pick (using the <b>problem picker</b>) a set of unsolved problems (categorized by the difficulty levels).
+  Then set the start date and duration and create a virtual contest using the following generator.
+  <!-- You can invite other UVa users to join your virtual contest (or set it to public so any UVa users can join). -->
+  If you want compete against shadow contestants from the past UVa contests, 
+  you can click the <b>past contests</b> and select from one of the past UVa contests.
+  The link to the virtual contest will appear after you generate it
+  (only people that know the link are able to view it).
+  </p>
+
+  <table width="900" cellpadding="5">
+    <tr>
+      <td width="175" style="font-size:12px">Contestants UVa IDs</td>
+      <td style="font-size:12px">
+        <input type="text" class="pickerclass" ng-model="user_ids" style="width:450px">
+        <!-- <input type="checkbox"> Public Contest (anyone can join) -->
+      </td>
+    </tr>
+    <tr>
+      <td style="font-size:12px">UVa Problem Numbers</td>
+      <td style="font-size:12px">
+        <input type="text" class="pickerclass" style="width:450px" ng-model="problem_numbers" value=""> 
+        <a style="font-weight:bold; color:blue; cursor:pointer;" ng-class="{'lightgreen-bg': view_picker=='pick'}" ng-click="view_problem_picker('pick')">&nbsp;Problem Picker&nbsp;</a> |
+        <a style="font-weight:bold; color:blue; cursor:pointer;" ng-class="{'lightgreen-bg': view_picker=='past'}" ng-click="view_problem_picker('past')">&nbsp;Past Contests&nbsp;</a>
+      </td>
+    </tr>
+    <tr ng-show="view_picker=='past'">
+      <td colspan="2">
+        <p>Select the contest title to get the list of problems from that past contest.
+          The solved column denotes how many problems solved by the contestants listed in the above field.
+          The problems column denotes the number of problems in that past contest.
+          The dacu column shows the total of distinct accepted users on the unsolved problems.
+          The duration column denotes the contest duration.
+        </p>
+        <table width="100%" border="0" style="border: 1px solid #AAA" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr class="tablebar" height="25">
+              <th align="left" colspan="11" style="padding-left:10px">
+                <tt style="float:right">Show : [
+                  <a style="text-decoration:none; color:white" ng-click="render_past_contests(25)">25</a> |
+                  <a style="text-decoration:none; color:white" ng-click="render_past_contests(50)">50</a> |
+                  <a style="text-decoration:none; color:white" ng-click="render_past_contests(100)">100</a> |
+                  <a style="text-decoration:none; color:white" ng-click="render_past_contests(1000000)">ALL</a>
+                ]&nbsp;</tt>
+                <tt style="float:right">View : [
+                  <span ng-class="{'lightgreen-color':vcshadow_view=='unsolved'}" ng-click="update_which('unsolved')" style="cursor:pointer">unsolved</span> |
+                  <span ng-class="{'lightgreen-color':vcshadow_view=='solved'}" ng-click="update_which('solved')" style="cursor:pointer">solved</span> |
+                  <span ng-class="{'lightgreen-color':vcshadow_view=='both'}" ng-click="update_which('both')" style="cursor:pointer">both</span>
+                ] &nbsp;</tt>
+                Past Contests
+              </th>
+            </tr>
+            <tr class="tablesubar" height="22">
+              <th width="60" ng-click="sort_by('id')" style="cursor:pointer">ID</th>
+              <th width="360" ng-click="sort_by('title')" style="cursor:pointer" align="left">&nbsp; Contest Title</th>
+              <!-- <th width="80">Link -->
+              <th width="80" ng-click="sort_by('solved')" style="cursor:pointer">Solved</th>
+              <th width="80" ng-click="sort_by('nprobs')" style="cursor:pointer"># Problems</th>
+              <th width="80" ng-click="sort_by('dacu')" style="cursor:pointer">Dacu</th>
+              <th width="80" ng-click="sort_by('duration')" style="cursor:pointer">Duration</th>
+            </tr>
+          </thead>
+          <tbody ng-click="select_past_contest($event)" ng-bind-html-unsafe="next_vcshadow" class="alt_colors">
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr ng-show="view_picker=='pick'">
+      <td colspan="2">
+        <table width="100%" border=0 style="border: 1px solid #AAA; margin-bottom:15px">
+          <thead>
+            <tr class="tablebar">
+              <td colspan="2"><span style="float:right">
+                Pick7 : [ 
+                <a style="color:white; font-weight:normal; cursor:pointer;" ng-class="{'underline': picker_type==1}" ng-click="render_problem_picker(1)">Easy</a> | 
+                <a style="color:white; font-weight:normal; cursor:pointer;" ng-class="{'underline': picker_type==2}" ng-click="render_problem_picker(2)">Medium</a> |
+                <a style="color:white; font-weight:normal; cursor:pointer;" ng-class="{'underline': picker_type==3}" ng-click="render_problem_picker(3)">Uniform</a>
+                ] &nbsp; 
+                Show : [ 
+                <a style="color:white; font-weight:normal; cursor:pointer;" ng-class="{'underline': show_unsolved}" ng-click="set_show_unsolved(true)">unsolved</a> | 
+                <a style="color:white; font-weight:normal; cursor:pointer;" ng-class="{'underline': !show_unsolved}" ng-click="set_show_unsolved(false)">all</a> ] &nbsp;</span>
+                &nbsp; Problems Picker ({{n_selected}} Selected)
+               </td>
+            </tr>
+            <tr class="tablesubar">
+              <td width="70" align="center">Difficulty</td>
+              <td>Problem Numbers</td>
+            </tr>
+          </thead>
+          <tbody class="alt_colors" ng-click="toggle_problem($event)" ng-bind-html-unsafe="picker_tbody"></tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="font-size:12px">Contest Date and Duration</td>
+      <td style="font-size:12px">
+        <input type="text" size="14" ng-model="contest_date" placeholder="yyyy/mm/dd">&nbsp; hh:mm 
+        <input type="text" size="5" ng-model="contest_time" placeholder="hh:mm">
+        &nbsp; Duration 
+        <input type="text" size="3" ng-model="duration" value="5h"> 
+        (suffix: <b>h</b>=hours, <b>d</b>=days, <b>w</b>=week)
+      </td>
+    </td>
+    <tr>
+      <td>&nbsp;</td>
+      <td><button ng-disabled="is_generating" ng-click="generate_vcontest()"> Generate Virtual Contest </button></td>
+    </tr>
+    <tr ng-show="vcontest_link">
+      <td>&nbsp;</td>
+      <td>
+        <p>Here is the virtual contest link (the problem list is hidden until the contest starts):</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp; <b style="font-size:14px"><a href="{{vcontest_link_href}}" target="_blank">{{vcontest_link}}</a></b></p>
+
+        <!-- <p>To host the virtual contest in your own website, copy paste the following HTML codes to your web page.
+        <b style="color:red">Note</b>: you must hide your web page (containing the ranklist) <b>before</b> the contest start,
+        otherwise the contestants can see the problem numbers of the contest in advance.<br>
+        </p>
+        <textarea id="vcontest_gen_ta" rows="10" cols="80"></textarea>
+         -->
+      </td>
+    </tr>
+  </table>
+  <br>
+</div>

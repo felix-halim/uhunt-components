@@ -1,0 +1,66 @@
+<div>
+  <div style="width:{{width}}px; height:{{height}}px;">
+    <table cellpadding="1" cellspacing="2" class="uhunt_chat">
+      <tr>
+        <td valign="top" style="width:{{uname_width}}px">
+          <div style="height:{{chat_height}}px; width:135px; overflow-y:auto; word-wrap:break-word;">
+            -- Users({{whos_here.users.length}}/{{whos_here.count}}):{{whos_here.server | uhunt_duration}}<br>
+            <span ng-repeat="u in whos_here.users">
+              <a target="_blank" style="text-decoration:none" href="/id/{{u.uid}}">{{u.uname}}</a>:{{u.since | uhunt_duration}}<br></span>
+          </div>
+        </td>
+        <td valign=top style="border-left:1px solid #aaa; width:{{message_width}}px">
+          <div ng-show="!show_login_dialog" id="xx" class="scroll-down-able" style="margin-left:2px; height:{{chat_height}}px; width:{{message_width}}px; scrollTop:100px" scrollTop="100">
+            <div ng-repeat="msg in messages" scroll-if="$last" ng-bind-html-unsafe="msg.message"></div>
+          </div>
+          <div ng-show="show_login_dialog" style="background-color:#CCCCFF; padding:15px 15px 5px 15px; margin:0 auto 0 auto; border:1px solid #EEEEFF;">
+            <div ng-show="is_logged_in">
+              <div style="width:300px; margin:auto auto auto auto;">
+                <p align="right" style="font-size:14px">
+                  You are signed in as <b>{{signed_in_as}}</b>.<br>
+                  <span ng-show="is_invisible">you are currently invisible<br></span><br>
+                  <button ng-click="sign_out()">Sign Out</button>
+                  <button ng-click="show_login_dialog=false">Close</button>
+                </p>
+              </div>
+            </div>
+            <div ng-show="!is_logged_in">
+              <form autocomplete="on" ng-submit="sign_in()" method="POST">
+                <table align="center" style="border:1px dotted #6666FF; padding:0 15px 0 15px" cellspacing="5">
+                  <tr>
+                    <td style="font-size:12px">Username</td>
+                    <td><input ng-model="username" type="text" placeholder="your UVa username"></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size:12px">uHunt Code</td>
+                    <td><input ng-model="password" type="password"></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" ng-click="toggle_invisible()" ng-checked="is_invisible"> Invisible</td>
+                    <td align="right">
+                      <input type="submit" value="Sign In" ng-disabled="logging_in">
+                      <input type="button" ng-click="show_login_dialog=false" value="Cancel">
+                    </td>
+                  </tr>
+                </table>
+              </form>
+              <p>If you do not have a uHunt code yet, you can get it by sending an email to <b>uhunt@felix-halim.net</b>
+              from your UVa's registered email, with subject "<b>generate-code</b>" without the quotes.</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr style="height:{{opts.post_height+7}}px">
+        <td align="center">
+          <a class='ellipsis' ng-click="show_login_dialog=!show_login_dialog" style="color:blue; width:135px; cursor:pointer; text-decoration:none; font-weight:bold; font-size:13px">{{signed_in_user}}</a>
+        </td>
+        <td>
+          <form ng-submit="post_message()" ng-disabled="post_chat_disabled">
+            <input type="text" ng-disabled="post_chat_disabled" ng-model="post_text" placeholder="post your message here (max 255 chars)" style="height:{{post_height}}px; width:{{message_width}}px; outline:none;">
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

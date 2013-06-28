@@ -1,0 +1,48 @@
+<div ng-init="problem_width=185; username_width=185">
+  <table width="970" style="border: 1px solid #AAA; display:none" cellpadding="1" ng-show="show">
+    <thead>
+      <tr class="tablebar" height="25">
+      <th align="left" colspan="10" height="25">
+        <span style="float:right; font-weight:normal; color:white; padding-right:10px">Show :
+          <a class="white" style="cursor:pointer" ng-click="set_limit(5)"> 5 </a> |
+          <a class="white" style="cursor:pointer" ng-click="set_limit(10)"> 10 </a> |
+          <a class="white" style="cursor:pointer" ng-click="set_limit(25)"> 25 </a> |
+          <a class="white" style="cursor:pointer" ng-click="set_limit(50)"> 50 </a> |
+          <a class="white" style="cursor:pointer" ng-click="set_limit(100)"> 100 </a>
+        </span>
+        &nbsp; <a target="_blank" class="white" href="{{livesub_url}}"><b>Live Submissions</b></a>
+         <a class="white" style="cursor:pointer" ng-click="set_show(false)">(hide)</a>
+      </th>
+      <tr class="tablesubar" height="20">
+        <th width="65" align="left">&nbsp; &nbsp; #</th>
+        <th width="40" align="left"></th>
+        <th width="{{problem_width}}" align="left">&nbsp; Problem Title</th>
+        <th width="{{username_width}}" align="left">&nbsp; User (username)</th>
+        <th width="110" align="left">&nbsp; Verdict</th>
+        <th width="60" align="center">Lang</th>
+        <th width="55" align="center">Time</th>
+        <th width="55" align="center">Best</th>
+        <th width="55" align="center">Rank</th>
+        <th width="115" align="center">Submit Time</th>
+      </tr>
+    </thead>
+    <tbody class="alt_colors" style="font-family:verdana; font-size:11px">
+      <tr style="height:18px" ng-repeat="s in live_submissions | limitTo:limit">
+        <td>&nbsp;{{s.sid}}</td>
+        <td align="right" uhunt-problem="{{s.pid}}"></td>
+        <td>
+          <span style="float:right; padding-right:5px" uhunt-discuss="{{s.p.num}}"></span>
+          <span uhunt-problem-title="{{s.pid}}" width="{{problem_width}}"></span>
+        </td>
+        <td width="{{username_width}}" uhunt-name-uname name="{{s.name}}" uname="{{s.uname}}" uid="{{s.uid}}"></td>
+        <td uhunt-verdict="{{s.ver}}"></td>
+        <td align="center" uhunt-language="{{s.lan}}"></td>
+        <td align="center" uhunt-runtime="{{s.run}}"></td>
+        <td align="center" uhunt-best-runtime="{{s.pid}}"></td>
+        <td align="center" uhunt-rank="{{s.rank}}"></td>
+        <td align="center">{{s.sbt | uhunt_format_ago }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p><a ng-click="set_show(true)" style="cursor:pointer; text-decoration:none; color:blue; display:none" ng-show="!show">View Live Submissions</a></p>
+</div>

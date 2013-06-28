@@ -1,0 +1,64 @@
+<div ng-init="problem_width=200">
+  <h2 style="color:#A000A0" align="center">
+    <i>{{name + ' (' + username + ')'}}</i>
+    <span style="font-weight:normal">statistics</span>
+  </h2>
+
+  <div style="float:left; width:240px; height:325px;">
+    <canvas progress-statistics="" width="225" height="150"></canvas>
+    <canvas submission-statistics="" width="225" height="150"></canvas>
+  </div>
+
+  <table style="border: 1px solid #AAA">
+    <thead><tr class="tablebar">
+      <th align="left" colspan="7" height="25" valign="middle">
+        <span style="float:right; font-weight:normal">Show :
+          <a class="white" style="cursor:pointer" ng-click="set_last_n(5)">5</a> |
+          <a class="white" style="cursor:pointer" ng-click="set_last_n(10)">10</a> |
+          <a class="white" style="cursor:pointer" ng-click="set_last_n(50)">50</a> |
+          <a class="white" style="cursor:pointer" ng-click="set_last_n(100)">100</a> |
+          <a class="white" style="cursor:pointer" ng-click="set_last_n(500)">500</a> |
+          <a class="white" style="cursor:pointer" ng-click="set_last_n(1000000)">ALL</a> &nbsp;
+        </span>
+        &nbsp; <a target="_blank" class="white"
+        href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=19&page=show_authorstats&userid={{uid}}">Last Submissions</a>
+      <tr class="tablesubar">
+        <th width="260" align="left">&nbsp; Problem
+        <th width="110" align="left">&nbsp; Verdict
+        <th width="60">Lang
+        <th width="50">Time
+        <th width="50">Best
+        <th width="50">Rank
+        <th width="120">Submit Time
+    </thead>
+
+    <tbody class="alt_colors">
+      <tr style="height:18px" ng-repeat="s in last_submissions">
+        <td>
+          <span style="float:right; padding-right:5px" uhunt-discuss="{{s.num}}"></span>
+          &nbsp;<span uhunt-problem="{{s.pid}}"></span> -
+          <span uhunt-problem-title="{{s.pid}}" width="{{problem_width}}"></span>
+        </td>
+        <td uhunt-verdict="{{s.ver}}"></td>
+        <td align="center" uhunt-language="{{s.lan}}"></td>
+        <td align="center" uhunt-runtime="{{s.run}}"></td>
+        <td align="center" uhunt-best-runtime="{{s.pid}}"></td>
+        <td align="center" uhunt-rank="{{s.rank}}"></td>
+        <td align="center">{{s.sbt | uhunt_format_ago }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><b style="color:blue">Solved</b> : <b>{{n_solved}}</b>,
+  <b style="color:blue">Submissions</b> : <b>{{n_submissions}}</b></p>
+  <div style="line-height:12px">
+    <p style="font-size:10px; font-family:verdana; display:inline;" ng-bind-html-unsafe="solved_problems"></p>
+    <a ng-show="show_more" style="text-decoration:none; color:blue; cursor:pointer; font-size:10px; font-family:verdana;" ng-click="update_solved_problems('more')">...more</a>
+    <a ng-show="!show_more" style="text-decoration:none; color:blue; cursor:pointer; font-size:10px; font-family:verdana;" ng-click="update_solved_problems('less')">&lt;&lt;less</a>
+  </div>
+
+  <div ng-show="tried.length > 0">
+    <p><b style="color:blue">Tried but not yet solved</b> : <b>{{tried.length}}</b></p>
+    <p style="font-size:10px; font-family:verdana" ng-bind-html-unsafe="tried_problems"></p>
+   </div>
+</div>

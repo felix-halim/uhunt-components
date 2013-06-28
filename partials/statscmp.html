@@ -1,0 +1,31 @@
+<div>
+  <h2 align="center">Statistics Comparer</h2>
+
+  <p>It is good to have partners (or rivals) in any competitions. Rivals can give you strong motivations to improve yourself. One of the motivations can be: "to solve any problem that your rivals solves, just to stay ahead from your rivals :)". <!--span style="color:blue; cursor:pointer" onclick="$('#statscmp_info').toggle()">More Info...</span--></p>
+
+  <p>Using set manipulations you can merge your statistics with your partners and compare it with other groups of rivals :D interesting, isn't it? See the following examples. Later on, the variables A,B,C,D,E should be replaced by the usernames of the users.
+
+  <ul>
+  <li>To know what are the the problems you (A) have solved but your rivals (B,C,D,E) do not, execute the following set operation: <b>A-B-C-D-E</b> or <b>A-(B+C+D+E)</b>.
+
+  <li>Suppose you and your partners form a group (A,C) and your rivals form another group (B,E). To see what problems that your group hasn't solved but your rival has, execute this set operation: <b>(A+C)-(B+E)</b>.
+  <li>Now if you want to know what are the problems that your group and your rivals have not solved, there is a special set <b style="color:blue">S</b> which contains all problems in UVa. So you can do set operation: <b>S-(A+C)-(B+E)</b> or <b>S-(A+C+B+E)</b> or <b>S-A-C-B-E</b>.
+  <li>There are other special sets: <b style="color:blue">cp3</b> and <b style="color:blue">cp3s</b> which contains all problems in the 3rd edition Competitive Programming book and the starred only. For the 1st and 2nd edition exercises, change the number accordingly (cp1, cp1s, cp2, cp2s).
+  </ul>
+
+  <p>The available operators are:
+  union <b style="color:blue">+</b>,
+  subtraction <b style="color:blue">-</b>,
+  intersection <b style="color:blue">&</b>,
+  and brackets <b style="color:blue">(</b> <b style="color:blue">)</b> to force operator precedence.</p>
+
+  <form ng-submit="execute_cmp_exp(cmp_expr)">
+    Expression:
+    <input ng-model="cmp_expr" type="text" size="50" value="">
+    <input type="submit" value="Compare">
+    <button ng-click="clear()">Clear</button>
+  </form>
+  <p ng-bind-html-unsafe="cmp_expr_res"></p>
+  <br>
+</div>
+

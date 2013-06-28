@@ -1,0 +1,104 @@
+<table border="0" width="920" align="center" ng-show="is_valid_search()" style="clear:both; margin: 0 auto 20px auto;">
+  <caption>
+    <p ng-show="search_error" style="font-size:14px; font-weight:bold">{{search_error}}</p>
+    <h2 style="color:#3030FF; padding-top:20px; padding-bottom:15px" align="center">
+      <i>
+        <a target="_blank" style="text-decoration:none" href="{{ext_problem_url1}}">{{number}}</a> - 
+        <a target="_blank" style="text-decoration:none" href="{{problem_url}}">{{search_title}}</a>
+      </i>
+      <span style="font-weight:normal">&nbsp; [
+        <a target="_blank" style="text-decoration:none" href="{{stats_url}}">statistics</a> /
+        <a class="nou" target="_blank" href="http://acm.uva.es/board/search.php?keywords={{number}}">discuss</a>]
+         &nbsp; <a ng-click="hide()" style="cursor:pointer; font-size:18px">(hide)</a>
+      </span>
+    </h2>
+  </caption>
+  <tr>
+    <td valign="top">
+      <div style="width:235px; height:315px; margin:0">
+        <canvas problem-progress-statistics="number" width="225" height="150"></canvas>
+        <canvas problem-submission-statistics="number" width="225" height="150" style="padding-top:10px"></canvas>
+      </div>
+    </td>
+    <td valign="top">
+      <table border="0" style="border: 1px solid #AAA; margin-bottom:12px;">
+        <thead>
+          <tr class="tablebar" height="25">
+            <th id="nth_colspan" align="left" colspan="10" style="padding-left:10px; color:white">
+              <span style="float:right; font-weight:normal">
+              View : [ 
+                <a style="cursor:pointer" ng-class="{'lightgreen-color': show_last=='last', 'white-color': show_last!='last'}" ng-click="set_show_last('last')">last</a> |
+                <a style="cursor:pointer" ng-class="{'lightgreen-color': show_last=='yours', 'white-color': show_last!='yours'}" ng-click="set_show_last('yours')">yours({{your_last_submissions.length}})</a>
+              ] &nbsp; &nbsp;
+              Show : [
+                <a class="white" style="cursor:pointer" ng-click="set_max_last_subs(5)">5</a> |
+                <a class="white" style="cursor:pointer" ng-click="set_max_last_subs(10)">10</a> |
+                <a class="white" style="cursor:pointer" ng-click="set_max_last_subs(50)">50</a> |
+                <a class="white" style="cursor:pointer" ng-click="set_max_last_subs(100)">100</a> |
+                <a class="white" style="cursor:pointer" ng-click="set_max_last_subs(500)">500</a> &nbsp; </span>
+              Submissions
+            </th>
+          </tr>
+          <tr class="tablesubar">
+            <th width="65" align="left">&nbsp; #</th>
+            <th width="50">Rank</th>
+            <th width="180" align="left">&nbsp; User (username)</th>
+            <th width="110" align="left">&nbsp; Verdict</th>
+            <th width="60">Lang</th>
+            <th width="50">Time</th>
+            <th width="120">Submit Time</th>
+          </tr>
+        </thead>
+        <tbody id="num_gen_subs_tbody" class="alt_colors">
+          <tr ng-repeat="s in last_submissions | limitTo:max_last_subs" style="height:18px">
+            <td align=right>{{s.sid}}&nbsp;</td>
+            <td align="center" uhunt-rank="{{s.rank}}"></td>
+            <td width="170" uhunt-name-uname name="{{s.name}}" uname="{{s.uname}}" uid="{{s.uid}}"></td>
+            <!-- <td>&nbsp;{{uhunt.tpl.username(s.uid, s.name + ' (s.uname + ')', width) + '</td> -->
+            <td uhunt-verdict="{{s.ver}}"></td>
+            <td align="center" uhunt-language="{{s.lan}}"></td>
+            <td align="center" uhunt-runtime="{{s.run}}"></td>
+            <td align="center">{{s.sbt | uhunt_format_ago }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table id="num_gen_rank" border="0" style="border: 1px solid #AAA; ">
+        <thead>
+          <tr class="tablebar" height="25">
+            <th id="nth_colspan" align="left" colspan="10" style="padding-left:10px; color:white">
+              <span style="float:right; font-weight:normal">
+              View : [ 
+                <a ng-click="set_show_top('top')" style="cursor:pointer" ng-class="{'lightgreen-color': show_top=='top', 'white-color': show_top!='top'}">the-top</a> |
+                <a ng-click="set_show_top('nearby')" style="cursor:pointer" ng-class="{'lightgreen-color': show_top=='nearby', 'white-color': show_top!='nearby'}">nearby</a> ] &nbsp; &nbsp; 
+              Show : [ 
+                <a class="white" style="cursor:pointer" ng-click="set_max_rank(5)">5</a> |
+                <a class="white" style="cursor:pointer" ng-click="set_max_rank(10)">10</a> |
+                <a class="white" style="cursor:pointer" ng-click="set_max_rank(50)">50</a> |
+                <a class="white" style="cursor:pointer" ng-click="set_max_rank(100)">100</a> |
+                <a class="white" style="cursor:pointer" ng-click="set_max_rank(500)">500</a> &nbsp; </span>
+              Ranklist
+            </th>
+          </tr>
+          <tr class="tablesubar">
+            <th width="75" align="left">&nbsp; #</th>
+            <th width="55">Rank</th>
+            <th width="220" align="left">&nbsp; User (username)</th>
+            <th width="75">Lang</th>
+            <th width="75">Time</th>
+            <th width="140">Submit Time</th>
+          </tr>
+        </thead>
+        <tbody class="alt_colors">
+          <tr ng-repeat="s in ranklist | limitTo:max_rank" style="height:18px; font-weight:{{font_weight(s)}}">
+            <td align=right>{{s.sid}}&nbsp;</td>
+            <td align="center" uhunt-rank="{{s.rank}}"></td>
+            <td width="190" uhunt-name-uname name="{{s.name}}" uname="{{s.uname}}" uid="{{s.uid}}"></td>
+            <td align="center" uhunt-language="{{s.lan}}"></td>
+            <td align="center" uhunt-runtime="{{s.run}}"></td>
+            <td align="center">{{s.sbt | uhunt_format_ago }}</td>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+</table>
