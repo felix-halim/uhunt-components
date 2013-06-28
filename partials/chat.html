@@ -6,7 +6,7 @@
           <div style="height:{{chat_height}}px; width:135px; overflow-y:auto; word-wrap:break-word;">
             -- Users({{whos_here.users.length}}/{{whos_here.count}}):{{whos_here.server | uhunt_duration}}<br>
             <span ng-repeat="u in whos_here.users">
-              <a target="_blank" style="text-decoration:none" href="/id/{{u.uid}}">{{u.uname}}</a>:{{u.since | uhunt_duration}}<br></span>
+              <a target="_blank" style="text-decoration:none" href="#/id/{{u.uid}}">{{u.uname}}</a>:{{u.since | uhunt_duration}}<br></span>
           </div>
         </td>
         <td valign=top style="border-left:1px solid #aaa; width:{{message_width}}px">

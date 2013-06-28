@@ -183,7 +183,7 @@ s(d)).toLowerCase()},
   };
 })
 
-.factory('uhunt', function ($rootScope, $location, uhunt_config, uhunt_util, uhunt_rpc) {
+.factory('uhunt_url_monitor', function ($rootScope, $location, uhunt_config, uhunt_util, uhunt_rpc) {
 
   function fetch() {
     if (!uhunt_config.user.uid) return;
@@ -218,7 +218,6 @@ s(d)).toLowerCase()},
   $rootScope.$on('$locationChangeSuccess', function (event) {
     uhunt_config.user.uid = uhunt_util.parse_uid_from_path($location.path()); // Load this user statistics.
   })
-  return uhunt_config;
 })
 
 // Periodic polling to get updates for submissions and chats.
@@ -305,7 +304,7 @@ s(d)).toLowerCase()},
         var p = uhunt_problems.pid(v.rank1pid);
         if (p) {
           return chat.message = '<tt style="color:green; font-size:12px"><i>uHunt</i>&gt; ' +
-            '<a href="/u/' + uhunt_util.escape_html(v.uname) + '" style="font-weight:bold; color: green; text-decoration:none">' + 
+            '<a href="#/id/' + v.uid + '" style="font-weight:bold; color: green; text-decoration:none">' + 
             uhunt_util.escape_html(v.uname) + '</a> gets <b>Rank 1</b> for ' +
             numbers_to_discussions(p.num + '') + (v.run? (' at ' + uhunt_util.format_ms(v.run) + 's') : '') + '</tt>';
         }
@@ -314,7 +313,7 @@ s(d)).toLowerCase()},
       }
     }
     return  chat.message = '<a target="_blank" style="text-decoration:none; font-weight:bold; font-style:italic" href="' + 
-      '/id/'+ chat.userid+'">' + uhunt_util.escape_html(chat.uname) + '</a>&gt; ' + numbers_to_discussions(chat.message);
+      '#/id/'+ chat.userid+'">' + uhunt_util.escape_html(chat.uname) + '</a>&gt; ' + numbers_to_discussions(chat.message);
   }
 
   function add_chat(chat) {

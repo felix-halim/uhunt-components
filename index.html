@@ -17,7 +17,6 @@
   <script src="js/uhunt-statscmp.js"></script>
   <script src="js/uhunt-vcontest.js"></script>
   <script>
-
   angular.module('uHunt', [
     'uHunt.base',
     'uHunt.chat',
@@ -29,7 +28,8 @@
     'uHunt.ranklist',
     'uHunt.statscmp',
     'uHunt.vcontest',
-  ]);
+  ])
+  .factory('uhunt', function (uhunt_config, uhunt_url_monitor) { return uhunt_config; });
   </script>
 </head>
 
@@ -100,14 +100,14 @@
 
     <ul>
       <li><a target="_new" href="http://umt.boocode.com"><b>UVa Management Tool</b></a> -
-      By <a target="_new" href="/id/61126">Lâm Phan Việt</a>
+      By <a target="_new" href="#/id/61126">Lâm Phan Việt</a>
 
       <li><a target="_new" href="https://github.com/lucastan/uva-node"><b>UVa Command Line Tool</b></a> -
-      By <a target="_new" href="/id/64869">Bao Hong Tan</a>
+      By <a target="_new" href="#/id/64869">Bao Hong Tan</a>
 
       <li>Windows Phone Apps:
-      <a target="_new" href="http://www.windowsphone.com/en-us/store/app/uva-tools/68705694-3fa8-4b3a-83b3-18274060ccbc"><b>UVa Tools</b></a> by <a target="_new" href="/id/60671">Héctor Galindo</a> and
-      <a target="_new" href="http://www.windowsphone.com/en-us/store/app/uva-stats/102ea0da-e48e-42d8-a9eb-acb99b81a18c"><b>UVa Stats</b></a> by <a target="_new" href="/id/180414">Jonathon Simister</a>.
+      <a target="_new" href="http://www.windowsphone.com/en-us/store/app/uva-tools/68705694-3fa8-4b3a-83b3-18274060ccbc"><b>UVa Tools</b></a> by <a target="_new" href="#/id/60671">Héctor Galindo</a> and
+      <a target="_new" href="http://www.windowsphone.com/en-us/store/app/uva-stats/102ea0da-e48e-42d8-a9eb-acb99b81a18c"><b>UVa Stats</b></a> by <a target="_new" href="#/id/180414">Jonathon Simister</a>.
 
       <li>Android App:
       <a target="_new" href="https://play.google.com/store/apps/details?id=com.acombee.uvatools"><b>UVa Mobile</b></a> by <a target="_new" href="http://www.acombee.com/">Acombee</a>.
