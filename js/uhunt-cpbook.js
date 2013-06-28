@@ -16,7 +16,7 @@ angular.module('uHunt.cpbook', ['uHunt.base'])
     ],['STL stack', 127,-514,-673,-727
     ],['STL queue', -336,-10901,-11034
     ],['STL map/set', -10226,11239,-11308,-11136
-    ],['STL priority_queue <a target="_blank" href="http://www.comp.nus.edu.sg/~stevenha/visualization/heap.html"><img height="15" border"0" src="http://uhunt.felix-halim.net/images/img.png"></a>', -908,-11492
+    ],['STL priority_queue <a target="_blank" href="http://www.comp.nus.edu.sg/~stevenha/visualization/heap.html"><img height="15" border"0" src="images/img.png"></a>', -908,-11492
   ]]},{title:'Data Structures With Our-Own Libraries', arr:[
     ['Graph (simple ones)', -291,-10928
     ],['Union-Find Disjoint Sets', -459,-793,10158,10301,10369,10583,10608,-11503
@@ -145,12 +145,12 @@ angular.module('uHunt.cpbook', ['uHunt.base'])
     ],["C++ STL stack (Java Stack)", 120, 127, -514, 551, 673, -727, 732, 10858, -11111
     ],["C++ STL queue (Java Queue)", 540, -10172, -10901, 10935, -11034
   ]]},{title:"Non Linear Data Structures with Built-in Libraries", arr:[
-    ["C++ STL priority_queue (Java PriorityQueue) <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/heap.html'><img height='15' border'0' src='http://uhunt.felix-halim.net/images/img.png'></a>", -1203, -10954, -11995
+    ["C++ STL priority_queue (Java PriorityQueue) <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/heap.html'><img height='15' border'0' src='images/img.png'></a>", -1203, -10954, -11995
     ],["C++ STL map/set (Java TreeMap/TreeSet)", 417, 484, 501, 642, 755, 860, -10226, 10282, 10295, 10374, 10686, 10815, 11062, 11136, 11239, -11286, 11308, -11629, 11849, 11860
   ]]},{title:"Data Structures with Our-Own Libraries", arr:[
-    ["Graph Data Structures Problems <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/representation.html'><img height='15' border'0' src='http://uhunt.felix-halim.net/images/img.png'></a>", 599, -10720, -10895, 10928, 11414, 11550, -11991
+    ["Graph Data Structures Problems <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/representation.html'><img height='15' border'0' src='images/img.png'></a>", 599, -10720, -10895, 10928, 11414, 11550, -11991
     ],["Union-Find Disjoint Sets", 459, -793, 10158, 10178, 10227, -10507, 10583, 10608, 10685, -11503, 11690, 11966
-    ],["Tree-related Data Structures <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/bit.html'><img height='15' border'0' src='http://uhunt.felix-halim.net/images/img.png'></a>", 297, 1232, -11235, 11297, 11350, -11402, 11525, -11926, 12086
+    ],["Tree-related Data Structures <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/bit.html'><img height='15' border'0' src='images/img.png'></a>", 297, 1232, -11235, 11297, 11350, -11402, 11525, -11926, 12086
   ]]}]},
 
   {title:"Problem Solving Paradigms", arr:
@@ -174,24 +174,24 @@ angular.module('uHunt.cpbook', ['uHunt.base'])
   ]]}]},
 
   {title:"Graph", arr:
-  [{title:"Graph Traversal <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/dfsbfs.html'><img height='15' border'0' src='http://uhunt.felix-halim.net/images/img.png'></a>", arr:[
+  [{title:"Graph Traversal <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/dfsbfs.html'><img height='15' border'0' src='images/img.png'></a>", arr:[
     ["Just Graph Traversal", 118, -168, 280, 614, 824, 1205, 10113, 10116, 10377, 10687, -11831, -11902, 11906
     ],["Flood Fill/Finding Connected Components", 260, 352, 469, 572, 657, 776, 782, 784, 785, 852, 871, 1197, 10336, 10946, -11094, -11110, 11244, 11470, 11518, 11561, 11749, -11953
     ],["Topological Sort", 124, 200, -872, -10305, -11060, 11686
     ],["Bipartite Graph Check", -10004, 10505, -11080, -11396
     ],["Finding Articulation Points/Bridges", -315, 610, -796, -10199
     ],["Finding Strongly Connected Components", -247, 1229, 10731, -11504, 11709, 11770, -11838
-  ]]},{title:"Minimum Spanning Tree <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/mst.html'><img height='15' border'0' src='http://uhunt.felix-halim.net/images/img.png'></a>", arr:[
+  ]]},{title:"Minimum Spanning Tree <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/mst.html'><img height='15' border'0' src='images/img.png'></a>", arr:[
     ["Standard", 908, 1208, 1235, 10034, -11228, -11631, 11710, 11733, -11747, 11857
     ],["Variants", 534, 544, 1216, 1234, 1265, -10048, 10099, 10147, -10369, 10397, 10462, -10600, 10842
-  ]]},{title:"Single-Source Shortest Paths (SSSP) <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/sssp.html'><img height='15' border'0' src='http://uhunt.felix-halim.net/images/img.png'></a>", arr:[
+  ]]},{title:"Single-Source Shortest Paths (SSSP) <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/sssp.html'><img height='15' border'0' src='images/img.png'></a>", arr:[
     ["On Unweighted Graph: BFS", 314, -321, 336, 383, 429, 439, 532, 567, 627, 762, 924, 928, 1251, 1253, 10009, 10044, -10047, 10067, 10150, 10422, 10610, 10653, 10959, 10977, 11049, -11101, 11352, 11513, 11624, 11792, 11974, 12160
     ],["On Weighted Graph: Dijkstra's", 341, 929, 1202, 10166, 10269, 10278, 10389, 10603, -10801, 10986, -11367, 11377, -11492, 11833, 12138
     ],["On Graph with Negative Weight Cycle: Bellman Ford's", -558, -10557, -11280
   ]]},{title:"All-Pairs Shortest Paths", arr:[
     ["Standard", 186, 423, -821, 1198, 1233, 1247, -10171, 10724, 10793, 10803, 10947, 11015, -11463
     ],["Variants", -104, 125, 436, -334, 869, -11047
-  ]]},{title:"Maximum Flow <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/maxflow.html'><img height='15' border'0' src='http://uhunt.felix-halim.net/images/img.png'></a>", arr:[
+  ]]},{title:"Maximum Flow <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/maxflow.html'><img height='15' border'0' src='images/img.png'></a>", arr:[
     ["Standard", -259, 753, -820, -10480, 10511, 10779
     ],["Variants", 563, 1242, 1259, 10092, 10330, -10594, -10746, 10806, -11506
   ]]},{title:"Special Graph (Directed Acyclic Graph)", arr:[
@@ -268,7 +268,7 @@ angular.module('uHunt.cpbook', ['uHunt.base'])
     ],["Quadrilaterals", 155, 201, -460, 476, 477, 10502, 10823, 10908, -11207, 11345, 11455, 11639, -11834
     ],["Great-Circle Distance", -535, -10075, 10316, 10897, -11817
     ],["Other 3D Objects", -737, -815, -10297
-  ]]},{title:"Polygon <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/convexhull.html'><img height='15' border'0' src='http://uhunt.felix-halim.net/images/img.png'></a>", arr:[
+  ]]},{title:"Polygon <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/convexhull.html'><img height='15' border'0' src='images/img.png'></a>", arr:[
     ["Standard", 109, 218, 361, 478, 634, 681, -811, 858, 1206, 10060, 10065, 10078, 10088, 10112, 10406, -10652, 11096, -11265, 11447, 11473, 11626
   ]]},{title:"Divide and Conquer", arr:[
     ["Standard", -152, -10245, 10566, 10668, 11378, -11646
@@ -283,7 +283,7 @@ angular.module('uHunt.cpbook', ['uHunt.base'])
     ],["Two Components - Involving Mathematics", -10637, -10717, -11428, 11730, 12137
     ],["Three/More Components", -1079, -10856, -11610
   ]]},{title:"More Advanced Dynamic Programming", arr:[
-    ["DP + bitmask <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/bitmask.html'><img height='15' border'0' src='http://uhunt.felix-halim.net/images/img.png'></a>", 1099, 1204, 1252, -10296, 10364, 10651, -10817, 10911, 11218, -11391, 11472, 12063,
+    ["DP + bitmask <a target='_blank' href='http://www.comp.nus.edu.sg/~stevenha/visualization/bitmask.html'><img height='15' border'0' src='images/img.png'></a>", 1099, 1204, 1252, -10296, 10364, 10651, -10817, 10911, 11218, -11391, 11472, 12063,
     ],["The More Challenging Ones", -473, 607, 882, 1096, 1211, 1214, 1220, 1222, 1228, 1231, 1236, 1238, 1240, 1244, 1245, 1248, 1255, 10069, 10081, 10163, 10164, 10271, -10482, -10626, 10898, 11285
   ]]},{title:"More Advanced Search", arr:[
     ["A*/IDA*", 652, 1217, 10073, -10181, -11163, -11212
@@ -564,7 +564,7 @@ angular.module('uHunt.cpbook', ['uHunt.base'])
       var cpbook_chapters = [ cpbook_1ed, cpbook_2ed, cpbook_3ed ];
       var nth = ['1st', '2nd', '3rd'];
       var color = ['blue', 'brown', 'green'];
-      var img = ['/images/cp.jpg', '/images/cp2-small.png', '/images/cp3.png'];
+      var img = ['images/cp.jpg', 'images/cp2-small.png', 'images/cp3.png'];
       var link = [
         'http://www.lulu.com/product/paperback/competitive-programming/12110025',
         'http://www.lulu.com/product/paperback/competitive-programming-2/16377304',
