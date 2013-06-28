@@ -22,5 +22,14 @@ Extract it to your website's public directory that can serve static files.
 Yes! you don't need special server that runs PHP or anything like that.
 As long as your server can serve static files, it will run fine.
 
+You can also run it locally if you have python installed.
+After downloading the files, go to the folder and run:
+
+    python -m SimpleHTTPServer 8000
+
+Then open your browser:
+
+    http://localhost:8000
+
 You are free to explore the codes, modify, extend it as you like.
 Let me know if you've built something cool out of it :)
