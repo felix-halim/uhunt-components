@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('uHunt.livesubs', ['uHunt.base'])
 
 .factory('livesubs_db', function (create_uhunt_db) {

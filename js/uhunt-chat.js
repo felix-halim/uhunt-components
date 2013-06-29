@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('uHunt.chat', ['uHunt.base'])
 
 .factory('chat_db', function (create_uhunt_db) {

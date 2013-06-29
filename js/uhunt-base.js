@@ -183,43 +183,6 @@ s(d)).toLowerCase()},
   };
 })
 
-.factory('uhunt_url_monitor', function ($rootScope, $location, uhunt_config, uhunt_util, uhunt_rpc) {
-
-  function fetch() {
-    if (!uhunt_config.user.uid) return;
-    console.log('Fetching statistics for uid: ' + uhunt_config.user.uid);
-    uhunt_rpc.subs_since(uhunt_config.user.uid, 0, function (res) {
-      uhunt_config.user.clear();
-      uhunt_config.user.set_name(res.name);
-      uhunt_config.user.set_uname(res.uname);
-      for (var i = 0; i < res.subs.length; i++){ 
-        var s = res.subs[i];
-        uhunt_config.user.update({ sid:s[0], pid:s[1], ver:s[2], run:s[3], sbt:s[4], lan:s[5], rank:s[6] });
-      }
-      uhunt_config.user.notify_all();
-    });
-  }
-
-  $rootScope.uhunt_user = uhunt_config.user;
-  $rootScope.$watch('uhunt_user.uid', fetch);
-
-  $rootScope.$watch('username_input', function () {
-    if (!$rootScope.username_input) return;
-    uhunt_rpc.uname2uid($rootScope.username_input, function (uid) {
-      if (uid) $location.path('/id/' + uid);
-    });
-  });
-
-  // Set the default statistics to be the author of uHunt >:).
-  if (!uhunt_util.parse_uid_from_path($location.path())) {
-    $location.path('/id/339');
-  }
-
-  $rootScope.$on('$locationChangeSuccess', function (event) {
-    uhunt_config.user.uid = uhunt_util.parse_uid_from_path($location.path()); // Load this user statistics.
-  })
-})
-
 // Periodic polling to get updates for submissions and chats.
 .factory('uhunt_poll', function ($timeout, $filter, uhunt, uhunt_util, uhunt_problems, uhunt_rpc) {
   var subs = [];              // Contains last submissions.
@@ -601,6 +564,7 @@ s(d)).toLowerCase()},
     template: '<a target="_blank" class="nou" href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=problem_stats&problemid={{pid}}&category=24">{{run}}</a>',
     link: function (scope, element, attrs) {
       scope.pid = attrs.uhuntBestRuntime;
+      if (!scope.pid) return;
       scope.run = uhunt_problems.ready() ? uhunt_util.format_ms(uhunt_problems.pid(scope.pid).mrun) : '';
     }
   };
@@ -843,10 +807,3 @@ s(d)).toLowerCase()},
 })
 
 ;
-
-  // 'livesubs_table_display': 'bool',
-  // 'uhunt_series_user_filter': 'json',
-  // 'uhunt_widget_user_filter_chk': 'bool',
-  // 'uhunt_widget_highlight_uids_chk': 'bool',
-  // 'series_index': 'int',
-  // 'show_live_submissions': 'int',
