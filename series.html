@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en" ng-app="uHunt">
+<head>
+  <meta charset="utf-8">
+  <title>uHunt</title>
+  <link rel="stylesheet" href="uhunt.css"/>
+  <link rel="shortcut icon" href="images/uva-rounded.png" />
+  <script src="js/angular.js"></script>
+  <script src="js/ui-bootstrap-tpls-0.4.0.js"></script>
+  <script src="js/uhunt-base.js"></script>
+  <script src="js/uhunt-chat.js"></script>
+  <script src="js/uhunt-statistics.js"></script>
+  <script src="js/uhunt-livesubs.js"></script>
+  <script src="js/uhunt-ranklist.js"></script>
+  <script src="js/uhunt-series.js"></script>
+  <script>
+  angular.module('uHunt', [
+    'uHunt.chat',
+    'uHunt.statistics',
+    'uHunt.livesubs',
+    'uHunt.ranklist',
+    'uHunt.series',
+    'ui.bootstrap',
+  ])
+
+  .factory('uhunt', function ($rootScope, $location, $timeout, uhunt_config, uhunt_util, uhunt_rpc, series_db) {
+    uhunt_config.chat_room = 'series';
+
+    var path = $location.path();
+    $rootScope.tabs = {};
+    console.log(path);
+
+    $timeout(function () {
+      if (path[0] == '/') path = path.substring(1);
+      if (path == 'home' || (uhunt_util.parseInt(path) >= 1 && uhunt_util.parseInt(path) <= 13)) {
+        $rootScope.tabs[''+path] = true;
+      } else {
+        $rootScope.tabs[path] = series_db.get('path');
+      }
+    }, 1000);
+
+    $rootScope.select_tab = function (nth) {
+      $location.path(nth);
+    };
+    $rootScope.$on('$locationChangeSuccess', function (event) {
+      var path = $location.path().substring(1);
+      $rootScope.tabs[path] = true;
+      series_db.set('path', path);
+    });
+    return uhunt_config;
+  })
+  </script>
+  <style>
+  .tab_menu { outline: none; font-size: 15px; }
+  </style>
+</head>
+
+<body>
+<div style="margin:0 auto; width:970px">
+
+  <div uhunt-chat width="550" height="250" style="float:right; padding: 0 0 10px 25px"></div>
+
+  <img border="0" src="images/uva.png" width="70" style="padding-right:15px; float:left">
+
+  <h1 style="margin:8px 0 20px 0; padding-top:5px; font-size:10px">
+    <span style="font-family:arial; font-weight:bold; font-size:40px; margin-bottom:0px">uHunt</span><br style="">
+    <span style="font-family:arial; font-weight:normal; font-size:15px; font-style:italic">Training Series</span>
+  </h1>
+
+  <p style="font-family:verdana; font-size:13px">
+    uHunt Training Series provides weekly training practice using the
+    existing <a href="http://uva.onlinejudge.org/" target="_blank">UVa OJ</a> problems.
+    Any registered UVa OJ user can participate (you don't need to register to uHunt).
+    To participate, solve the problems listed in the current week
+    (by <a target="_blank" href="http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem">submitting your soluton to UVa OJ</a>) and you will automatically appear in this week ranklist.
+    The problemsets for each week is shown in the tabs below.
+  </p>
+  <p>
+    You can create your own training series using <a target="_blank" href="https://github.com/felix-halim/uhunt-components">the uHunt components</a> available at Github.
+  </p>
+
+  <tabset>
+    <tab active="tabs['home']" select="select_tab('home')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">Home</tab-heading>
+      <table style="float:right; width:300px; border: 1px solid gray; margin:15px 0 25px 25px; font-size:15px" cellspacing="0" cellpadding="4">
+        <tr class="tablebar">
+          <th width="60" style="font-size:15px">Week</th>
+          <th align="left" style="font-size:15px"> &nbsp; Topics</th>
+        </tr>
+        <tr><th style="font-size:14px">#1</th><td style="font-size:14px"> &nbsp; Ad Hoc</td></tr>
+        <tr><th style="font-size:14px">#2</th><td style="font-size:14px"> &nbsp; Data Structures and Libraries</td></tr>
+        <tr><th style="font-size:14px">#3</th><td style="font-size:14px"> &nbsp; Complete Search</td></tr>
+        <tr><th style="font-size:14px">#4</th><td style="font-size:14px"> &nbsp; Dynamic Programming 1</td></tr>
+        <tr><th style="font-size:14px">#5</th><td style="font-size:14px"> &nbsp; Dynamic Programming 2</td></tr>
+        <tr><th style="font-size:14px">#6</th><td style="font-size:14px"> &nbsp; Graph 1 (Basics)</td></tr>
+        <tr><th style="font-size:14px">#7</th><td style="font-size:14px"> &nbsp; Graph 2 (Shortest Paths)</td></tr>
+        <tr><th style="font-size:14px">#8</th><td style="font-size:14px"> &nbsp; Graph 3 (Network Flow)</td></tr>
+        <tr><th style="font-size:14px">#9</th><td style="font-size:14px"> &nbsp; Graph 4 (Matching)</td></tr>
+        <tr><th style="font-size:14px">#10</th><td style="font-size:14px"> &nbsp; Mathematics</td></tr>
+        <tr><th style="font-size:14px">#11</th><td style="font-size:14px"> &nbsp; String Processing</td></tr>
+        <tr><th style="font-size:14px">#12</th><td style="font-size:14px"> &nbsp; Computational Geometry</td></tr>
+        <tr><th style="font-size:14px">#13</th><td style="font-size:14px"> &nbsp; Mix and Match</td></tr>
+      </table>
+
+      <h1 style="font-size:18px; margin:0">What is uHunt Training Series?</h1>
+
+      <p style="font-size:13px">
+      uHunt Training Series is a tool to organize a set of contests (each consists about 10 problems) 
+      to be held periodically (e.g., every week or every day). 
+      It is designed for coaches to organize 
+      a series of contests for their students using the existing <a href="http://uva.onlinejudge.org/" target="_blank">UVa OJ</a> problems. 
+      This training series was a "trial run" by National University of Singapore (NUS) for its CS3233 module 
+      (using the <a href="https://sites.google.com/site/stevenhalim/home/material">Competitive Programming materials</a>). 
+      The problemsets for each week are chosen by Steven Halim, the NUS Coach. 
+      The topic for each week is listed in the table on the right. 
+      </p>
+
+      <h1 style="font-size:18px">How did the contestants join the training?</h1>
+
+      <p style="font-size:13px">
+      All UVa OJ users were invited to join this training series! 
+      Any UVa OJ user can submit solutions (through UVa OJ) for the problems listed in the currently running week 
+      and they will automatically appear in the ranklist. 
+      Each week featured different problem category which requires a different sets of skills. 
+      We believe these are the <b>basic</b> skills needed for participating in programming competitions 
+      such as ACM ICPC, TopCoder, Google Code Jam, Facebook Hacker Cup, etc.
+      </p>
+
+      <h1 style="font-size:18px">Training Summary</h1>
+
+      <p style="font-size:14px">
+      This trial training series has finished. Thanks for those who have participated! 
+      We would like to gather any feedback you may have! Contact me at: <b style="color:blue">felix.halim@gmail.com</b>.
+      The table below aggregates the total number of solved problems for each session.
+      </p>
+
+      <div uhunt-session-summary></div>
+    </tab>
+
+
+    <tab active="tabs['1']" select="select_tab('1')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#1</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 - 1000*60*60*0"
+        end-sbt="1358334685531 + 1000*60*60*24*7"
+        problem-numbers="12279,12247,10284,12239,11221,857,12148,556,12502,1121,11581">
+        <h3 style="margin:0">Session 1 - Ad Hoc Problems</h3>
+        <p>This is the first session in the training series.
+        This session is meant to familiarize with the UVa Online Judge and uHunt.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+        </p>
+      </div>
+    </tab>
+
+    <tab active="tabs['2']" select="select_tab('2')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#2</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7"
+        end-sbt="1358334685531 + 1000*60*60*24*14"
+        problem-numbers="12356, 146, 11111, 10172, 1203, 11572, 11991, 1197, 11402, 12086">
+        <h3 style="margin:0">Session 2 - Data Structures and Libraries</h3>
+        <p>Welcome to the second session in the training series.
+        This session focus on problems that can be easily solved using existing libraries in C++ (or Java).
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+        </p>
+      </div>
+    </tab>
+
+    <tab active="tabs['3']" select="select_tab('3')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#3</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*14"
+        end-sbt="1358334685531 + 1000*60*60*24*21"
+        problem-numbers="11242, 11236, 234, 1047, 775, 1262, 11195, 11198, 11212, 11329">
+        <h3 style="margin:0">Session 3 - Complete Search</h3>
+        <p>Welcome to the third session in the training series.
+        This session focus on problems that performs complete search.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+      </div>
+    </tab>
+
+    <tab active="tabs['4']" select="select_tab('4')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#4</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7*3"
+        end-sbt="1358334685531 + 1000*60*60*24*7*4"
+        problem-numbers="10684, 11951, 481, 11566, 10306, 11284, 196, 10337, 10980, 11450">
+        <h3 style="margin:0">Session 4 - Dynamic Programming 1</h3>
+        <p>Welcome to the fourth session in the training series.
+        This session focus on dynamic programming problems.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+      </div>
+    </tab>
+
+    <tab active="tabs['5']" select="select_tab('5')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#5</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7*4"
+        end-sbt="1358334685531 + 1000*60*60*24*7*5"
+        problem-numbers="10401, 11655, 10759, 11258, 10911, 10482, 10626, 1099, 1220, 11486">
+        <h3 style="margin:0">Session 5 - Dynamic Programming 2</h3>
+        <p>Welcome to the fifth session in the training series.
+        This session still focusing on dynamic programming problems.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+      </div>
+    </tab>
+
+    <tab active="tabs['6']" select="select_tab('6')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#6</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7*5"
+        end-sbt="1358334685531 + 1000*60*60*24*7*6"
+        problem-numbers="11902, 1103, 11060, 11396, 10765, 247, 11631, 10369, 11695, 10596">
+        <h3 style="margin:0">Session 6 - Graph 1 (Basics)</h3>
+        <p>Welcome to the sixth session in the training series.
+        This session is an introduction to graph problems.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+      </div>
+    </tab>
+
+    <tab active="tabs['7']" select="select_tab('7')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#7</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7*6"
+        end-sbt="1358334685531 + 1000*60*60*24*7*7"
+        problem-numbers="388, 314, 1112, 10801, 11367, 10449, 821, 1056, 10350, 10923">
+        <h3 style="margin:0">Session 7 - Graph 2 (Shortest Paths)</h3>
+        <p>Welcome to the seventh session in the training series.
+        This session is about the most common graph problems, finding shortest paths.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+      </div>
+    </tab>
+
+    <tab active="tabs['8']" select="select_tab('8')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#8</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7*7"
+        end-sbt="1358334685531 + 1000*60*60*24*7*8"
+        problem-numbers="820, 10092, 10779, 11167, 10330, 10480, 11380, 11506, 10594, 11301">
+        <h3 style="margin:0">Session 8 - Graph 3 (Network Flow)</h3>
+        <p>Welcome to the eighth session in the training series.
+        This session is about network flow which becomes quite popular lately.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+      </div>
+    </tab>
+
+    <tab active="tabs['9']" select="select_tab('9')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#9</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7*8"
+        end-sbt="1358334685531 + 1000*60*60*24*7*9"
+        problem-numbers="670, 753, 1194, 10349, 11138, 11159, 12083, 12168, 10746, 1184">
+        <h3 style="margin:0">Session 9 - Graph 4 (Matching)</h3>
+        <p>Welcome to the ninth session in the training series.
+        This session is about graph matching which also becomes quite popular lately.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+      </div>
+    </tab>
+
+    <tab active="tabs['10']" select="select_tab('10')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#10</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7*9"
+        end-sbt="1358334685531 + 1000*60*60*24*7*10"
+        problem-numbers="11254, 10751, 12143, 11952, 12542, 10541, 11270, 10990, 12464, 12293">
+        <h3 style="margin:0">Session 10 - Mathematics</h3>
+        <p>Welcome to the tenth session in the training series.
+        This session is about mathematics.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+      </div>
+    </tab>
+
+    <tab active="tabs['11']" select="select_tab('11')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#11</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7*10"
+        end-sbt="1358334685531 + 1000*60*60*24*7*11"
+        problem-numbers="11385, 11357, 10854, 10058, 12155, 12467, 11022, 719, 11107, 11512">
+        <h3 style="margin:0">Session 11 - String Processing</h3>
+        <p>Welcome to the eleventh session in the training series.
+        This session is about string processing.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+      </div>
+    </tab>
+
+    <tab active="tabs['12']" select="select_tab('12')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#12</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7*11"
+        end-sbt="1358334685531 + 1000*60*60*24*7*12"
+        problem-numbers="10263, 10927, 1388, 11909, 11800, 137, 361, 1111, 11265, 811">
+        <h3 style="margin:0">Session 12 - Computational Geometry</h3>
+        <p>Welcome to the twelfth session in the training series.
+        This second to last session is about computational geometry.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+      </div>
+    </tab>
+
+    <tab active="tabs['13']" select="select_tab('13')">
+      <tab-heading style="font-size:16px; font-family:verdana; font-weight:; color:blue">#13</tab-heading>
+      <div uhunt-session
+        start-sbt="1358334685531 + 1000*60*60*24*7*12"
+        end-sbt="1358334685531 + 1000*60*60*24*7*13"
+        problem-numbers="10983, 11491, 976, 11643, 1039, 1092, 11574, 295, 1040, 11610">
+        <h3 style="margin:0">Session 13 - Mix and Match</h3>
+        <p>Welcome to the last session in the training series.
+        This last session is about random things that we learned.
+        The problem set is listed on the table on right.
+        Click on the problem number to see the problem statement.
+        To submit your solution, you can use 
+        <a target='_blank' style='color:blue; font-weight:bold' href='http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=25&page=submit_problem'>UVa Quick Submit</a>.
+        <br><br>This session has ended, however you are encouraged to continue solve the unsolved problems
+        because those problems are your weaknesses. You will only grow stronger if you work on those unsolved problems.
+    <!--     You should see your submission result in the live submission table below and you will also appear in the ranklist.
+        The time remaining for this session is shown in the Ranklist table bar in yellow color.
+        <br><br>
+        You are encouraged to ask questions when any difficulty arises.
+        You can use the chat on the top right corner of this page.",
+     --> 
+      </div>
+    </tab>
+  </tabset>
+</div>
+</body>
+</html>

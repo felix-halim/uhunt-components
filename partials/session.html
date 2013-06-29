@@ -1,0 +1,52 @@
+<div style="background-color:">
+  <div style="width:415px; float:right; margin:0 0 0 25px;">
+    <table width="100%" cellspacing="0" cellpadding="2" style="border: 1px solid #bbb; font-size:13px; font-family:verdana">
+      <thead>
+        <tr class="tablebar" style="height:24px">
+          <th width="40" align="right">#</th>
+          <th align="left"> &nbsp; Problem Title</th>
+          <th width="60">Difficulty</th>
+          <th width="40">AC</th>
+          <th width="40">NOS</th>
+        </tr>
+      </thead>
+      <tbody class="alt_colors">
+        <tr ng-repeat="p in problems">
+          <td align="right" uhunt-problem="{{p.pid}}"></td>
+          <td>&nbsp;
+            <span style="float:right; padding-right:5px" uhunt-discuss="{{p.num}}"></span>
+            <span uhunt-problem-title="{{p.pid}}" width="205"></span>
+          </td>
+          <td align="center"> Level {{level(p.dacu)}}</td>
+          <td align="center">{{p.ac}}</td>
+          <td align="center">{{p.nos}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div ng-transclude></div>
+
+  <br style="clear:both">
+
+  <div uhunt-session-livesubs="{{session.id}}" style="margin-top: 15px"></div>
+
+  <table width="100%" style="border: 1px solid #AAA; margin:15px 0 15px 0;">
+    <thead>
+      <tr class="tablebar">
+        <th align="left" colspan="{{ 4 + session.problems.length }}" height="25">
+          <span id="uhunt_widget_contest_status_+index+" style="float:right; margin-right:10px; font-weight:normal"></span>
+          &nbsp; <a style="text-decoration:none; color:white">Ranklist</a>
+          &nbsp; &nbsp;<span style="color:white; font-weight:normal">[ 
+          <a style="text-decoration:none; color:white" href="javascript:void(0)" onclick="$('#uhunt_series_widget_ranklist_filter_dialog').dialog('open');">Config</a> ]</span>
+      </tr>
+      <tr class="tablesubar">
+        <th width="35">#
+        <th width="150" align=left> &nbsp;User (username)
+        <th width="80">Solved
+        <th ng-repeat="p in session.problems" uhunt-problem="{{p.pid}}"></th>
+      </tr>
+    </thead>
+    <tbody class="alt_colors" style="font-family:verdana; font-size:11px" ng-bind-html-unsafe="session.ranklist"></tbody>
+  </table>
+</div>
