@@ -30,6 +30,7 @@ After downloading the files, go to the folder and run:
 Then open your browser:
 
     http://localhost:8000
+    http://localhost:8000/series.html
 
 You are free to explore the codes, modify, extend it as you like.
 Let me know if you've built something cool out of it :)
