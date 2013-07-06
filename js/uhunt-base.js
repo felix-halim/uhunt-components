@@ -331,6 +331,12 @@ s(d)).toLowerCase()},
     if (data.length > 0) poll_id = data[data.length - 1].id;
   }
 
+  function since_cmp(a, b) {
+    var A = a.uname.toLowerCase();
+    var B = b.uname.toLowerCase();
+    return A < B ? -1 : (A > B ? 1 : 0);
+  }
+
   var whos_here_promise = true;
   function whos_here() { // Refresh every 1 minute.
     $timeout.cancel(whos_here_promise);
@@ -342,6 +348,7 @@ s(d)).toLowerCase()},
         if (uid == 'count' || uid == 'server') continue;
         config.whos_here.users.push(data[uid]);
       }
+      config.whos_here.users.sort(since_cmp);
       whos_here_promise = $timeout(whos_here, 60000);
     });
   }
