@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" ng-app="uHunt">
+<head>
+  <meta charset="utf-8">
+  <title>uHunt</title>
+  <link rel="stylesheet" href="uhunt.css"/>
+  <link rel="shortcut icon" href="images/uva-rounded.png" />
+  <script src="js/angular.js"></script>
+  <script src="js/uhunt-base.js"></script>
+  <script src="js/uhunt-livesubs.js"></script>
+  <script>
+  angular.module('uHunt', [
+    'uHunt.base',
+    'uHunt.livesubs',
+  ])
+
+  .factory('uhunt', function (uhunt_config) {
+    // No configuration.
+    return uhunt_config;
+  })
+  </script>
+</head>
+
+<body>
+
+  <div uhunt-livesubs></div>
+
+</body>
+</html>
