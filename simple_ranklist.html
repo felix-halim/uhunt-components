@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+// Utility to perform asynchronous HTTP request.
+function ajax(api_url, result_callback) {
+  var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+  xhr.onload = function() {
+    if (xhr.readyState == 4) {
+      if (xhr.status == 200) {
+        var data = JSON.parse(xhr.responseText); // Parse the text into Javascript object.
+        result_callback(data); // Notify the caller.
+      } else {
+        console.error(xhr.statusText);
+      }
+    }
+  }
+  xhr.open("GET", api_url, true); // Use asynchronous call so that your browser does not hang.
+  xhr.onerror = function (e) { console.error(xhr.statusText); }; // Log to console if there is an error.
+  xhr.send();
+}
+
+// Use these functions to communicate to uHunt API.
+function uhunt_api_ranklist(uid, result_callback) {
+  ajax("http://uhunt.felix-halim.net/api/ranklist/" + uid + "/0/0", result_callback);
+}
+
+// These are your application functions.
+function render() {
+  var uva_ids = [ 155497, 168573, 155899, 155462, 110812, 154417, 167523 ];
+  var ranklists = []; // The user ranklist for the users in uva_ids.
+
+  uva_ids.forEach(function (uid) {
+    // Fetch the ranklist API asynchronously.
+    uhunt_api_ranklist(uid, function (user_ranklist) {
+      ranklists.push(user_ranklist[0]); // Only stores the first one.
+
+      if (ranklists.length != uva_ids.length) return;
+
+      // All users have been loaded, render it to screen.
+
+      // Sorts the ranklist based on the number of accepted problems.
+      ranklists.sort(function (userA, userB) {
+        return userB.ac - userA.ac; // Sort descending based on ac.
+      });
+
+      // Print the users based on ranklist order.
+      var html = "";
+      for (var i = 0; i < ranklists.length; i++) {
+        var user = ranklists[i];
+        html += "<tr><td>" + user.name + "<td>" + user.userid + "<td>" + user.ac;
+      }
+      document.getElementById("h").innerHTML = html;
+    });
+  });
+}
+</script>
+</head>
+
+<body onload="render()">
+<table border="1" cellpadding="5">
+<thead><tr><th>User Name</th><th>UVa ID</th><th>Number of Solved</th></tr></thead>
+<tbody id="h"></tbody>
+</table>
