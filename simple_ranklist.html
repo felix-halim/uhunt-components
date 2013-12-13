@@ -48,7 +48,7 @@ function render() {
       var html = "";
       for (var i = 0; i < ranklists.length; i++) {
         var user = ranklists[i];
-        html += "<tr><td>" + user.name + "<td>" + user.userid + "<td>" + user.ac;
+        html += "<tr><td>" + user.name + " (" + user.username + ")<td>" + user.userid + "<td>" + user.ac;
       }
       document.getElementById("h").innerHTML = html;
     });
@@ -59,6 +59,6 @@ function render() {
 
 <body onload="render()">
 <table border="1" cellpadding="5">
-<thead><tr><th>User Name</th><th>UVa ID</th><th>Number of Solved</th></tr></thead>
+<thead><tr><th>Name (username)</th><th>UVa ID</th><th>Number of Solved</th></tr></thead>
 <tbody id="h"></tbody>
 </table>
