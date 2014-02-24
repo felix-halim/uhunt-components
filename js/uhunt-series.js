@@ -89,14 +89,23 @@ angular.module('uHunt.series', ['uHunt.base'])
             if (highlight) highlighted += 'a[uid="'+uid+'"] { font-weight: bold; color: ' + c[0] + '; }\n';
           }
         }
+        // console.log(JSON.stringify(uhunt_series_session.user_filter));
         // console.log(highlighted);
         $('#uhunt_series_ranklist_style').html(highlighted);
         series_db.set('highlight_uids_chk', highlight);
         series_db.set('user_filter_chk', filter);
+        for (var sesid in uhunt_series_session.sessions)
+          if (uhunt_series_session.sessions.hasOwnProperty(sesid)) {
+            var s = uhunt_series_session.sessions[sesid];
+            s.update_ranklist();
+          }
       }
 
       var highlight = series_db.exists('highlight_uids_chk') ? series_db.get('highlight_uids_chk') : true;
       ranklist_filter(highlight, series_db.get('user_filter_chk'));
+
+      // TODO: remove hack.
+      uhunt_util.ranklist_filter = ranklist_filter;
 
       function problem_link_color_update() {
         if (!series_db.get('logged-in')) return;
@@ -128,6 +137,7 @@ angular.module('uHunt.series', ['uHunt.base'])
       users: {}, // For user ranklist.
       ranklist: [],
       live_submissions: [],
+      update_ranklist: update_ranklist
     };
 
     config.sessions[session.id] = session;
@@ -189,8 +199,7 @@ angular.module('uHunt.series', ['uHunt.base'])
       for (var uid in session.users) if (session.users.hasOwnProperty(uid)) {
         var u = session.users[uid], nac = 0, pen = 0, row = '';
         var bold = (uhunt.user.uid == uid) ? ' style="font-weight:bold" ' : '';
-        // console.log(filter + ' ' + JSON.stringify(session.user_filter));
-        // if (filter && !session.user_filter[uid]) continue;
+        if (filter && !config.user_filter[uid]) continue;
         for (var i = 0; i < session.problems.length; i++) {
           var p = u.stats(session.problems[i].pid);
           if (p.ac) {

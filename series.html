@@ -5,7 +5,10 @@
   <title>uHunt</title>
   <link rel="stylesheet" href="uhunt.css"/>
   <link rel="shortcut icon" href="images/uva-rounded.png" />
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/cupertino/jquery-ui.css" />
   <script src="js/angular.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
   <script src="js/ui-bootstrap-tpls-0.4.0.js"></script>
   <script src="js/uhunt-base.js"></script>
   <script src="js/uhunt-chat.js"></script>
@@ -47,12 +50,41 @@
       $rootScope.tabs[path] = true;
       series_db.set('path', path);
     });
+
+    $("#uhunt_series_widget_ranklist_filter_dialog").dialog({
+      autoOpen: false,
+      height: 400,
+      width: 650,
+      modal: true,
+      buttons: {
+        "Highlight": function() {
+          $(this).dialog("close");
+          series_db.set('user_filter', $('#uhunt_series_widget_ranklist_filter_ta').val().split('\n'));
+          uhunt_util.ranklist_filter(true, false);
+        },
+        "Filter": function() {
+          $(this).dialog("close");
+          series_db.set('user_filter', $('#uhunt_series_widget_ranklist_filter_ta').val().split('\n'));
+          uhunt_util.ranklist_filter(true, true);
+        },
+        "Disable": function() {
+          $(this).dialog("close");
+          series_db.set('user_filter', $('#uhunt_series_widget_ranklist_filter_ta').val().split('\n'));
+          uhunt_util.ranklist_filter(false, false);
+        }
+      },
+      close: function() {
+      }
+    });
+
     return uhunt_config;
-  })
+  });
+
   </script>
   <style>
   .tab_menu { outline: none; font-size: 15px; }
   </style>
+  <style id="uhunt_series_ranklist_style"></style>
 </head>
 
 <body>
@@ -384,7 +416,7 @@
 </body>
 </html>
 
-<!-- <div class="uhunt_series_widget" style="width:580px; height:245px; display:none">
+<div class="uhunt_series_widget" style="width:580px; height:245px; display:none">
   <div id="uhunt_series_widget_ranklist_filter_dialog" title="Ranklist Configuration">
     <p class="uhunt_text">Each line starts with a color name followed by UVa user ids separated by a space.<br>
       Click the "Highlight" button to highlight the users by the specified color in the ranklist.<br>
@@ -399,7 +431,7 @@ blue 1398 46746 72911 84473 92164 94702 113545 118544 135617 149531 151810 16956
     <p class="uhunt_text">This is useful to highlight users from by universities, year, etc.</p>
   </div>
 </div>
-
+<!-- 
 <script>
 .factory('uhunt_user', function (uhunt_create_user, uhunt_user_uid, uhunt_util) {
   var user = uhunt_create_user(uhunt_user_uid);
