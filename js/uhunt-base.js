@@ -38,8 +38,13 @@ angular.module('uHunt.base', [])
       .error(function() { $timeout(function () { ajax(method, url, params, cb); }, 10000); });
   }
 
+  function sync_ajax(method, url, params, cb) {
+    jQuery.ajax({ type: method, url: url, data: params, success: cb, async: false });
+  }
+
   return {
     http: ajax,
+    sync_http: sync_ajax,
     parseInt: function (v) { v = parseInt(v, 10); return isNaN(v) ? 0 : v; },
     now: function () { return Math.floor(new Date().getTime() / 1000); },
     Listener: Listener,
@@ -163,7 +168,7 @@ s(d)).toLowerCase()},
     cpbook: function(version, cb) { uhunt_util.http('GET', uhunt_config.api_url + '/api/cpbook/' + version, { }, cb); },
     poll: function(poll_id, cb) { uhunt_util.http('GET', uhunt_config.api_url + '/api/poll/' + poll_id, { }, cb); },
     problem_by_num : function(pnum, cb) { uhunt_util.http('GET', uhunt_config.api_url + '/api/p/num/' + pnum, { }, cb); },
-    problems: function (cb) { uhunt_util.http('GET', uhunt_config.api_url + '/api/p', { }, cb); },
+    problems: function (cb) { uhunt_util.sync_http('GET', uhunt_config.api_url + '/api/p', { }, cb); },
     psubs: function (pids, sbt_lo, sbt_hi, cb) { uhunt_util.http('GET', uhunt_config.api_url + '/api/p/subs/' + pids.join(',') + '/' + sbt_lo + '/' + sbt_hi, { }, cb); },
     psubs_limit: function (pid, sbt_lo, sbt_hi, limit, cb) { uhunt_util.http('GET', uhunt_config.api_url + '/api/p/subs/' + pid + '/' + sbt_lo + '/' + sbt_hi + '/' + limit, { }, cb); },
     subs_since: function (uid, sid, cb) { uhunt_util.http('GET', uhunt_config.api_url + '/api/subs-user/' + uid, { sid: sid }, cb); },
