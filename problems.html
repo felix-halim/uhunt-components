@@ -1,0 +1,65 @@
+<script>
+var problem_id = 36; // Problem number 100.
+var start_rank = 1; // Start showing ranklist from this rank.
+var ranklist_size = 100; // How many entries shown after the start_rank.
+
+function format_ver(ver) {
+  switch (ver) {
+    case 10 : return "Submission error";
+    case 15 : return "Can't be judged";
+    case 20 : return "In queue";
+    case 30 : return "Compile error";
+    case 35 : return "Restricted function";
+    case 40 : return "Runtime error";
+    case 45 : return "Output limit";
+    case 50 : return "Time limit";
+    case 60 : return "Memory limit";
+    case 70 : return "Wrong answer";
+    case 80 : return "PresentationE";
+    case 90 : return "Accepted";
+    default : return "--- ? ---";
+  }
+}
+
+function format_lan(lan) {
+  switch (lan) {
+    case 1 : return "ANSI C";
+    case 2 : return "Java";
+    case 3 : return "C++";
+    case 4 : return "Pascal";
+    case 5 : return "C++11";
+    default : return "--- ? ---";
+  }
+}
+
+function format_sbt(sbt) {
+  return new Date(sbt * 1000);
+}
+
+var oReq = new XMLHttpRequest();
+oReq.onload = function reqListener() {
+  var rank = JSON.parse(this.responseText);
+  var s = '';
+  for (var i = 0; i < rank.length; i++) {
+    var r = rank[i];
+    s += '<tr><td>' + r.sid + '<td>' + r.rank +
+      '<td><a href="http://uhunt.felix-halim.net/id/'+ r.uid +'" target="_blank">' + r.name + ' (' + r.uname + ')</a>' +
+      '<td>' + format_ver(r.ver) +
+      '<td>' + format_lan(r.lan) +
+      '<td>' + r.run +
+      '<td>' + format_sbt(r.sbt);
+  }
+  document.getElementById('problem_ranklist').innerHTML = s;
+};
+oReq.open("get", "http://uhunt.felix-halim.net/api/p/rank/" + problem_id + "/" + start_rank + "/" + ranklist_size, true);
+oReq.send();
+</script>
+
+<table border="1">
+<thead>
+<tr><th>#<th>Rank<th>User (username)<th>Verdict<td>Lang<td>Time<td>Submit Time
+</tr>
+</thead>
+<tbody id="problem_ranklist">
+</tbody>
+</table>
